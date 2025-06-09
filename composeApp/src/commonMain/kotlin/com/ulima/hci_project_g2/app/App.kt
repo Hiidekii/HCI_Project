@@ -15,7 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.ulima.hci_project_g2.auth.presentation.Intro.IntroScreen
+import com.ulima.hci_project_g2.auth.presentation.intro.IntroScreen
 import com.ulima.hci_project_g2.book.presentation.SelectedBookViewModel
 import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailAction
 import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailScreenRoot

@@ -6,3 +6,8 @@ val DarkBlue = Color(0xFF0B405E)
 val DesertWhite = Color(0xFFF7F7F7)
 val SandYellow = Color(0xFFFFBD64)
 val LightBlue = Color(0xFF9AD9FF)
+
+val PrimaryOrange = Color(0xFFF97317)
+val PrimaryBlack = Color(0xFF010101)
+val PrimaryWhite = Color(0xFFf2f7fa)
+val PrimaryGray = Color(0xFFeae8e8)
