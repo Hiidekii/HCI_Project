@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.core.presentation.components
+package com.ulima.hci_project_g2.features.auth.presentation.login.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -35,6 +35,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ulima.hci_project_g2.core.presentation.PrimaryGray
+import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
+import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
 
 @Composable
 fun MyTextField(
@@ -94,7 +97,7 @@ fun MyTextField(
             ),
             minLines = 1,
             maxLines = 1,
-            cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
+            cursorBrush = SolidColor(PrimaryOrange),
             textStyle = TextStyle(
                 color = if (isFocused){
                     MaterialTheme.colorScheme.primary
@@ -106,17 +109,17 @@ fun MyTextField(
                 .clip(RoundedCornerShape(16.dp))
                 .background(
                     if (isFocused){
-                        MaterialTheme.colorScheme.primary.copy(
+                        PrimaryOrange.copy(
                             alpha = 0.05f
                         )
                     } else {
-                        MaterialTheme.colorScheme.background
+                        PrimaryWhite
                     }
                 )
                 .border(
                     width = 1.dp,
                     color = if (isFocused){
-                        MaterialTheme.colorScheme.primary
+                        PrimaryOrange
                     } else {
                         Color.Gray
                     },

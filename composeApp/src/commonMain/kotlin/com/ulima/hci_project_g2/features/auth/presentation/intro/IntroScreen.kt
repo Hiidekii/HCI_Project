@@ -1,6 +1,7 @@
-package com.ulima.hci_project_g2.auth.presentation.intro
+package com.ulima.hci_project_g2.features.auth.presentation.intro
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -29,9 +32,12 @@ import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
 import hci_project.composeapp.generated.resources.Res
 import hci_project.composeapp.generated.resources.img_background
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun IntroScreen() {
+fun IntroScreen(
+    onStartClick: () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -40,7 +46,13 @@ fun IntroScreen() {
             painter = painterResource(Res.drawable.img_background),
             contentDescription = "Fondo Intro",
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+        )
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.2f)) // 40% de negro transparente
         )
 
         Column(
@@ -50,6 +62,7 @@ fun IntroScreen() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(200.dp))
             Text(
                 text = "Bienvenido a",
                 fontSize = 38.sp,
@@ -64,7 +77,9 @@ fun IntroScreen() {
             )
             Spacer(modifier = Modifier.height(16.dp))
             Button(
-                onClick = { },
+                onClick = {
+                    onStartClick()
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = PrimaryOrange,
                     contentColor = PrimaryWhite

@@ -1,6 +1,8 @@
 package com.ulima.hci_project_g2.di
 
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import com.ulima.hci_project_g2.features.auth.data.UsuarioRepository
+import com.ulima.hci_project_g2.features.auth.presentation.login.LoginViewModel
 import com.ulima.hci_project_g2.book.data.database.DatabaseFactory
 import com.ulima.hci_project_g2.book.data.database.FavoriteBookDatabase
 import com.ulima.hci_project_g2.book.data.network.KtorRemoteBookDataSource
@@ -34,4 +36,10 @@ val sharedModule = module {
     viewModelOf(::BookListViewModel)
     viewModelOf(::BookDetailViewModel)
     viewModelOf(::SelectedBookViewModel)
+
+    //ViewModels de UlimaFit
+    viewModelOf(::LoginViewModel)
+
+    //Repositories de UlimaFit
+    singleOf(::UsuarioRepository)
 }
