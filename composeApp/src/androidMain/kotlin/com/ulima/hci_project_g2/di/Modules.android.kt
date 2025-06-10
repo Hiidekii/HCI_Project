@@ -1,6 +1,10 @@
 package com.ulima.hci_project_g2.di
 
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.ulima.hci_project_g2.book.data.database.DatabaseFactory
+import createDataStore
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.okhttp.OkHttp
 import org.koin.android.ext.koin.androidApplication
@@ -11,4 +15,8 @@ actual val platformModule: Module
     get() = module {
         single<HttpClientEngine> { OkHttp.create() }
         single { DatabaseFactory(androidApplication()) }
+        single<DataStore<Preferences>> {
+            val context: Context = get()
+            createDataStore(context)
+        }
     }

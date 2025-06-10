@@ -13,6 +13,7 @@ import com.ulima.hci_project_g2.book.presentation.SelectedBookViewModel
 import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailViewModel
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListViewModel
 import com.ulima.hci_project_g2.core.data.HttpClientFactory
+import com.ulima.hci_project_g2.features.userData.presentation.UserDataViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -39,6 +40,7 @@ val sharedModule = module {
 
     //ViewModels de UlimaFit
     viewModelOf(::LoginViewModel)
+    viewModelOf(::UserDataViewModel)
 
     //Repositories de UlimaFit
     singleOf(::UsuarioRepository)

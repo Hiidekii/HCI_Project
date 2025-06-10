@@ -31,11 +31,13 @@ import com.ulima.hci_project_g2.core.presentation.PrimaryBlack
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
 import com.ulima.hci_project_g2.core.presentation.components.UlimaFitTopBar
 import com.ulima.hci_project_g2.features.auth.presentation.login.components.MyActionButton
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun EdadScreen(
     onReturnClick: () -> Unit,
-    onNextClick: () -> Unit
+    onNextClick: () -> Unit,
+    userDataViewModel: UserDataViewModel = koinViewModel()
 ){
     var edadSeleccionada by remember { mutableStateOf(17) }
 
@@ -73,10 +75,19 @@ fun EdadScreen(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 MyActionButton(
+                    text = "Probar preferences",
+                    enabled = true,
+                    isLoading = false,
+                    onClick = {
+                        userDataViewModel.getEdadPreferences()
+                    }
+                )
+                MyActionButton(
                     text = "Continuar",
                     enabled = true,
                     isLoading = false,
                     onClick = {
+                        userDataViewModel.saveEdadPreferences(edadSeleccionada)
                         onNextClick()
                     }
                 )
