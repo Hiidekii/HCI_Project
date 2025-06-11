@@ -21,6 +21,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,6 +44,8 @@ fun PesoScreen(
     onReturnClick: () -> Unit,
     userDataViewModel: UserDataViewModel = koinViewModel()
 ) {
+    var pesoSeleccionado by remember { mutableStateOf(159) }
+
     Scaffold(
         topBar = {
             UlimaFitTopBar(
@@ -102,6 +108,11 @@ fun PesoScreen(
                         )
                     }
                 }
+                Spacer(modifier = Modifier.weight(1f))
+                PesoRulerPicker(
+                    pesoSeleccionado = pesoSeleccionado,
+                    onPesoSeleccionado = { pesoSeleccionado = it }
+                )
                 Spacer(modifier = Modifier.weight(1f))
                 MyActionButton(
                     text = "Continuar",
