@@ -20,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,7 +27,7 @@ import com.ulima.hci_project_g2.core.presentation.PrimaryBlack
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
 import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
 import com.ulima.hci_project_g2.core.presentation.components.UlimaFitTopBar
-import com.ulima.hci_project_g2.features.auth.presentation.login.components.MyActionButton
+import com.ulima.hci_project_g2.core.presentation.components.MyActionButton
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

@@ -30,7 +30,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.ulima.hci_project_g2.features.auth.presentation.login.components.MyActionButton
+import com.ulima.hci_project_g2.core.presentation.components.MyActionButton
 import com.ulima.hci_project_g2.features.auth.presentation.login.components.MyPasswordTextField
 import com.ulima.hci_project_g2.features.auth.presentation.login.components.MyTextField
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange

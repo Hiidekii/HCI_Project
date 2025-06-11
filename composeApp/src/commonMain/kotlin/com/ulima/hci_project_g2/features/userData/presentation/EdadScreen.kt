@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.sp
 import com.ulima.hci_project_g2.core.presentation.PrimaryBlack
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
 import com.ulima.hci_project_g2.core.presentation.components.UlimaFitTopBar
-import com.ulima.hci_project_g2.features.auth.presentation.login.components.MyActionButton
+import com.ulima.hci_project_g2.core.presentation.components.MyActionButton
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
