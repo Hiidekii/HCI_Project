@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ulima.hci_project_g2.core.presentation.PrimaryBlack
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
+import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
 import com.ulima.hci_project_g2.core.presentation.components.UlimaFitTopBar
 import com.ulima.hci_project_g2.features.auth.presentation.login.components.MyActionButton
 import org.koin.compose.viewmodel.koinViewModel
@@ -49,7 +50,7 @@ fun EdadScreen(
                 onBackClick = { onReturnClick() }
             )
         },
-        containerColor = Color.White
+        containerColor = PrimaryWhite
     ) { paddingValues ->
         Box(
             modifier = Modifier
@@ -150,7 +151,7 @@ fun EdadPickerCarousel(
                 text = edadSeleccionada.toString(),
                 fontSize = 68.sp, // MÁS GRANDE
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = PrimaryWhite
             )
         }
     }
