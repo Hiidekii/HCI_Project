@@ -51,4 +51,8 @@ sealed interface Route {
 
     @Serializable
     data object Objetivo: Route
+
+    @Serializable
+    data object IntroduccionRutina: Route
+
 }
