@@ -42,7 +42,7 @@ fun UlimaFitTopBar(
         title = {
             Text(
                 text = titulo,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.ExtraBold,
                 fontSize = 24.sp
             )
         },

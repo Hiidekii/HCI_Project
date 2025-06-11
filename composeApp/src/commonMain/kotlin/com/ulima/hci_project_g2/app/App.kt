@@ -39,6 +39,7 @@ import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailViewMode
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListScreenRoot
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListViewModel
 import com.ulima.hci_project_g2.features.userData.presentation.EdadScreen
+import com.ulima.hci_project_g2.features.userData.presentation.ObjetivoFitnessScreen
 import com.ulima.hci_project_g2.features.userData.presentation.PesoScreen
 import com.ulima.hci_project_g2.features.userData.presentation.UserDataStartScreen
 import kotlinx.coroutines.flow.map
@@ -136,10 +137,21 @@ fun App(
                 composable<Route.Peso> {
                     PesoScreen(
                         onNextClick = {
-
+                            navController.navigate(Route.Objetivo)
                         },
                         onReturnClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
 
+                composable<Route.Objetivo> {
+                    ObjetivoFitnessScreen(
+                        onReturnClick = {
+                            navController.popBackStack()
+                        },
+                        onNextClick = {
+                            navController.navigate(Route.Objetivo)
                         }
                     )
                 }

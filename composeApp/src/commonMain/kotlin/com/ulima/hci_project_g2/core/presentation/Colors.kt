@@ -12,3 +12,6 @@ val PrimaryBlack = Color(0xFF010101)
 val PrimaryWhite = Color(0xFFFFFFFF)
 val PrimaryGray = Color(0xFFeae8e8)
 val SecondaryGray = Color(0xFFacacac)
+val TertiaryGray = Color(0xFFf3f3f4)
+val PrimaryDarkGray = Color(0xFF676c75)
+
