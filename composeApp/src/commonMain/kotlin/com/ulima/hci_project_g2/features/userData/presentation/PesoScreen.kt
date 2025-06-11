@@ -44,7 +44,8 @@ fun PesoScreen(
             UlimaFitTopBar(
                 titulo = "Evaluación",
                 pasoActual = 2,
-                onBackClick = { onReturnClick() }
+                onBackClick = { onReturnClick() },
+                containerColor = PrimaryOrange
             )
         },
         containerColor = PrimaryOrange

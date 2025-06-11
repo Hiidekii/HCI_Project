@@ -9,6 +9,6 @@ val LightBlue = Color(0xFFdbeafe)
 
 val PrimaryOrange = Color(0xFFF97317)
 val PrimaryBlack = Color(0xFF010101)
-val PrimaryWhite = Color(0xFFf2f7fa)
+val PrimaryWhite = Color(0xFFFFFFFF)
 val PrimaryGray = Color(0xFFeae8e8)
 val SecondaryGray = Color(0xFFacacac)
