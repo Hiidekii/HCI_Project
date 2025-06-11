@@ -75,14 +75,6 @@ fun EdadScreen(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 MyActionButton(
-                    text = "Probar preferences",
-                    enabled = true,
-                    isLoading = false,
-                    onClick = {
-                        userDataViewModel.getEdadPreferences()
-                    }
-                )
-                MyActionButton(
                     text = "Continuar",
                     enabled = true,
                     isLoading = false,

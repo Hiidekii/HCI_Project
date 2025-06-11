@@ -32,6 +32,9 @@ sealed interface Route {
     data object UserDataGraph: Route
 
     @Serializable
+    data object UserDataStart: Route
+
+    @Serializable
     data object Edad: Route
 
     @Serializable

@@ -21,7 +21,7 @@ class UserDataViewModel (
         }
     }
 
-    fun getEdadPreferences() {
+    /*fun getEdadPreferences() {
         viewModelScope.launch {
             preferences.data.collect { dataStore ->
                 val edadKey = intPreferencesKey("edad")
@@ -29,5 +29,5 @@ class UserDataViewModel (
                 println("Edad: $edad")
             }
         }
-    }
+    }*/
 }

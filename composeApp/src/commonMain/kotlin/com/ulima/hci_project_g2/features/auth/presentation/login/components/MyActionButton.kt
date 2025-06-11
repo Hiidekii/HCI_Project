@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ulima.hci_project_g2.core.presentation.PrimaryBlack
@@ -30,14 +31,16 @@ fun MyActionButton(
     isLoading: Boolean,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    containerColor: Color = PrimaryBlack,
+    contentColor: Color = PrimaryWhite,
     onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,
         enabled = enabled,
         colors = ButtonDefaults.buttonColors(
-            containerColor = PrimaryBlack,
-            contentColor = PrimaryWhite,
+            containerColor = containerColor,
+            contentColor = contentColor,
             disabledContainerColor = PrimaryGray,
             disabledContentColor = PrimaryWhite
         ),

@@ -39,6 +39,8 @@ import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailViewMode
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListScreenRoot
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListViewModel
 import com.ulima.hci_project_g2.features.userData.presentation.EdadScreen
+import com.ulima.hci_project_g2.features.userData.presentation.PesoScreen
+import com.ulima.hci_project_g2.features.userData.presentation.UserDataStartScreen
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -110,14 +112,33 @@ fun App(
             }
 
             navigation<Route.UserDataGraph>(
-                startDestination = Route.Edad
+                startDestination = Route.UserDataStart
             ){
+                composable<Route.UserDataStart> {
+                    UserDataStartScreen(
+                        onNextClick = {
+                            navController.navigate(Route.Edad)
+                        }
+                    )
+                }
+
                 composable<Route.Edad> {
                     EdadScreen(
                         onReturnClick = {
                             navController.popBackStack()
                         },
                         onNextClick = {
+                            navController.navigate(Route.Peso)
+                        }
+                    )
+                }
+
+                composable<Route.Peso> {
+                    PesoScreen(
+                        onNextClick = {
+
+                        },
+                        onReturnClick = {
 
                         }
                     )
