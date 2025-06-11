@@ -55,7 +55,7 @@ fun LoginScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(PrimaryWhite)
     ) {
 
         Box(
