@@ -85,7 +85,7 @@ fun App(
         val navController = rememberNavController()
         NavHost(
             navController = navController,
-            startDestination = Route.UserDataGraph
+            startDestination = Route.UserDataGraph //Route.AuthGraph
         ) {
 
             navigation<Route.AuthGraph>(
@@ -112,7 +112,7 @@ fun App(
             }
 
             navigation<Route.UserDataGraph>(
-                startDestination = Route.UserDataStart
+                startDestination = Route.Peso //Route.UserDataStart
             ){
                 composable<Route.UserDataStart> {
                     UserDataStartScreen(
@@ -136,12 +136,16 @@ fun App(
                 composable<Route.Peso> {
                     PesoScreen(
                         onNextClick = {
-
+                            navController.navigate(Route.Altura)
                         },
                         onReturnClick = {
-
+                            navController.popBackStack()
                         }
                     )
+                }
+
+                composable<Route.Altura> {
+
                 }
             }
 

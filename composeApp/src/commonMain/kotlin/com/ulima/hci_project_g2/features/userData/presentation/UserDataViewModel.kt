@@ -30,4 +30,13 @@ class UserDataViewModel (
             }
         }
     }*/
+
+    fun savePesoPreferences(peso: Int){
+        viewModelScope.launch {
+            preferences.edit { dataStore ->
+                val pesoKey = intPreferencesKey("peso")
+                dataStore[pesoKey] = peso
+            }
+        }
+    }
 }
