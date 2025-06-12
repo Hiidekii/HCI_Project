@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -33,7 +32,6 @@ import androidx.compose.ui.unit.sp
 import com.ulima.hci_project_g2.core.presentation.PrimaryBlack
 import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
 import hci_project.composeapp.generated.resources.Res
-import hci_project.composeapp.generated.resources.img_evaluacion
 import hci_project.composeapp.generated.resources.img_introduccionRutina
 import org.jetbrains.compose.resources.painterResource
 
