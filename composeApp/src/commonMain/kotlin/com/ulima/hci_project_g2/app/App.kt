@@ -38,11 +38,20 @@ import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailScreenRo
 import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailViewModel
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListScreenRoot
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListViewModel
+import com.ulima.hci_project_g2.features.exercise.domain.Exercise
+import com.ulima.hci_project_g2.features.exercise.domain.MuscleGroup
+import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseDetailScreen
+import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseIntructionsScreen
 import com.ulima.hci_project_g2.features.userData.presentation.EdadScreen
 import com.ulima.hci_project_g2.features.userData.presentation.IntroduccionScreen
 import com.ulima.hci_project_g2.features.userData.presentation.ObjetivoFitnessScreen
 import com.ulima.hci_project_g2.features.userData.presentation.PesoScreen
 import com.ulima.hci_project_g2.features.userData.presentation.UserDataStartScreen
+import hci_project.composeapp.generated.resources.Res
+import hci_project.composeapp.generated.resources.ejercicio
+import hci_project.composeapp.generated.resources.ic_balanza
+import hci_project.composeapp.generated.resources.img_introduccionRutina
+import hci_project.composeapp.generated.resources.img_maquinaremoalto
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -160,7 +169,52 @@ fun App(
                 composable<Route.IntroduccionRutina> {
                     IntroduccionScreen(
                         onNextClick = {
-                            navController.navigate(Route.Objetivo)
+                            navController.navigate(Route.Ejercicio)
+                        }
+                    )
+                }
+                val ejercicio1 = Exercise(
+                    name            = "Máquina de remo alto",
+                    duration = 9,            // 9 minutos
+                    calories    = 45,                // 45 kcal
+                    sets            = "3 × 15",
+                    muscleGroups    = listOf(
+                        MuscleGroup.BACK,
+                        MuscleGroup.ARMS,
+                        MuscleGroup.CORE
+                    ),
+                    rewardPoints    = 25,
+                    instructions    = listOf(
+                        "Ajusta el asiento y la resistencia según tu nivel.",
+                        "Siéntate con la espalda recta y pies firmes en los reposapiés.",
+                        "Agarra el agarre con las dos manos, extiende los brazos y tira hacia el pecho exhalando.",
+                        "Vuelve despacio a la posición inicial inhalando.",
+                        "Repite el movimiento de forma controlada."
+                    ),
+                    image           = Res.drawable.ejercicio,
+                    gif             = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYms2c2J4amUwY2R2Zzg2amhqNDdxYndyZnNhbW1lbDV4dG1wbjh0eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qt7bBGJ8x7ZRu/giphy.gif"
+                )
+
+                composable<Route.Ejercicio> {
+                    ExerciseDetailScreen(
+                        onNextClick = {
+                            navController.navigate(Route.EjercicioIntrucciones)
+                        },
+                        exercise = ejercicio1,
+                        onBackClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
+
+                composable<Route.EjercicioIntrucciones> {
+                    ExerciseIntructionsScreen(
+                        onNextClick = {
+                            navController.navigate(Route.Ejercicio)
+                        },
+                        exercise = ejercicio1,
+                        onBackClick = {
+                            navController.popBackStack()
                         }
                     )
                 }

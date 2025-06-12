@@ -55,4 +55,10 @@ sealed interface Route {
     @Serializable
     data object IntroduccionRutina: Route
 
+    @Serializable
+    data object Ejercicio: Route
+
+    @Serializable
+    data object EjercicioIntrucciones: Route
+
 }
