@@ -36,7 +36,6 @@ import com.ulima.hci_project_g2.features.exercise.domain.Exercise
 import com.ulima.hci_project_g2.features.exercise.presentation.components.ExerciseTopBar
 import org.jetbrains.compose.resources.painterResource
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExerciseDetailScreen(
     exercise: Exercise,
