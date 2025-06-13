@@ -30,8 +30,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ulima.hci_project_g2.core.presentation.PrimaryBlack
-import com.ulima.hci_project_g2.core.presentation.PrimaryGray
 import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
+import com.ulima.hci_project_g2.core.presentation.SecondaryGray
 
 @Composable
 fun MyActionButton(
@@ -49,7 +49,7 @@ fun MyActionButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = contentColor,
-            disabledContainerColor = PrimaryGray,
+            disabledContainerColor = SecondaryGray,
             disabledContentColor = PrimaryWhite
         ),
         shape = RoundedCornerShape(25.dp),

@@ -2,13 +2,26 @@ package com.ulima.hci_project_g2.app
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
@@ -17,17 +30,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.ulima.hci_project_g2.features.auth.presentation.intro.IntroScreen
+import com.ulima.hci_project_g2.features.auth.presentation.login.LoginScreen
 import com.ulima.hci_project_g2.book.presentation.SelectedBookViewModel
 import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailAction
 import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailScreenRoot
 import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailViewModel
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListScreenRoot
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListViewModel
-import com.ulima.hci_project_g2.features.auth.presentation.intro.IntroScreen
-import com.ulima.hci_project_g2.features.auth.presentation.login.LoginScreen
 import com.ulima.hci_project_g2.features.userData.presentation.EdadScreen
 import com.ulima.hci_project_g2.features.userData.presentation.PesoScreen
 import com.ulima.hci_project_g2.features.userData.presentation.UserDataStartScreen
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -121,9 +136,73 @@ fun App(
                 composable<Route.Peso> {
                     PesoScreen(
                         onNextClick = {
-                            navController.navigate(Route.Altura)
+                            navController.navigate(Route.Objetivo)
                         },
                         onReturnClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
+
+                composable<Route.Objetivo> {
+                    ObjetivoFitnessScreen(
+                        onReturnClick = {
+                            navController.popBackStack()
+                        },
+                        onNextClick = {
+                            navController.navigate(Route.IntroduccionRutina)
+                        }
+                    )
+                }
+
+                composable<Route.IntroduccionRutina> {
+                    IntroduccionScreen(
+                        onNextClick = {
+                            navController.navigate(Route.Ejercicio)
+                        }
+                    )
+                }
+                val ejercicio1 = Exercise(
+                    name            = "Máquina de remo alto",
+                    duration = 9,            // 9 minutos
+                    calories    = 45,                // 45 kcal
+                    sets            = "3 × 15",
+                    muscleGroups    = listOf(
+                        MuscleGroup.BACK,
+                        MuscleGroup.ARMS,
+                        MuscleGroup.CORE
+                    ),
+                    rewardPoints    = 25,
+                    instructions    = listOf(
+                        "Ajusta el asiento y la resistencia según tu nivel.",
+                        "Siéntate con la espalda recta y pies firmes en los reposapiés.",
+                        "Agarra el agarre con las dos manos, extiende los brazos y tira hacia el pecho exhalando.",
+                        "Vuelve despacio a la posición inicial inhalando.",
+                        "Repite el movimiento de forma controlada."
+                    ),
+                    image           = Res.drawable.ejercicio,
+                    gif             = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYms2c2J4amUwY2R2Zzg2amhqNDdxYndyZnNhbW1lbDV4dG1wbjh0eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qt7bBGJ8x7ZRu/giphy.gif"
+                )
+
+                composable<Route.Ejercicio> {
+                    ExerciseDetailScreen(
+                        onNextClick = {
+                            navController.navigate(Route.EjercicioIntrucciones)
+                        },
+                        exercise = ejercicio1,
+                        onBackClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
+
+                composable<Route.EjercicioIntrucciones> {
+                    ExerciseIntructionsScreen(
+                        onNextClick = {
+                            navController.navigate(Route.Ejercicio)
+                        },
+                        exercise = ejercicio1,
+                        onBackClick = {
                             navController.popBackStack()
                         }
                     )
