@@ -38,9 +38,18 @@ import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailScreenRo
 import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailViewModel
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListScreenRoot
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListViewModel
+import com.ulima.hci_project_g2.features.exercise.domain.Exercise
+import com.ulima.hci_project_g2.features.exercise.domain.MuscleGroup
+import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseDetailScreen
+import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseIntructionsScreen
+import com.ulima.hci_project_g2.features.userData.presentation.AlturaScreen
 import com.ulima.hci_project_g2.features.userData.presentation.EdadScreen
+import com.ulima.hci_project_g2.features.userData.presentation.IntroduccionScreen
+import com.ulima.hci_project_g2.features.userData.presentation.ObjetivoFitnessScreen
 import com.ulima.hci_project_g2.features.userData.presentation.PesoScreen
 import com.ulima.hci_project_g2.features.userData.presentation.UserDataStartScreen
+import hci_project.composeapp.generated.resources.Res
+import hci_project.composeapp.generated.resources.ejercicio
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -112,7 +121,7 @@ fun App(
             }
 
             navigation<Route.UserDataGraph>(
-                startDestination = Route.Peso //Route.UserDataStart
+                startDestination = Route.UserDataStart
             ){
                 composable<Route.UserDataStart> {
                     UserDataStartScreen(
@@ -135,6 +144,17 @@ fun App(
 
                 composable<Route.Peso> {
                     PesoScreen(
+                        onNextClick = {
+                            navController.navigate(Route.Altura)
+                        },
+                        onReturnClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
+
+                composable<Route.Altura> {
+                    AlturaScreen(
                         onNextClick = {
                             navController.navigate(Route.Objetivo)
                         },
@@ -206,10 +226,6 @@ fun App(
                             navController.popBackStack()
                         }
                     )
-                }
-
-                composable<Route.Altura> {
-
                 }
             }
 

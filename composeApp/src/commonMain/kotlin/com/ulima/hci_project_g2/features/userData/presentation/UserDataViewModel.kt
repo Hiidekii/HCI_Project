@@ -41,22 +41,32 @@ class UserDataViewModel (
         }
     }
 
-    fun getPesoPreferences() {
-        viewModelScope.launch {
-            preferences.data.collect { dataStore ->
-                val pesoKey = stringPreferencesKey("peso")
-                val peso = dataStore[pesoKey]
-                println("Peso: $peso")
-            }
-        }
-    }
+//    fun getPesoPreferences() {
+//        viewModelScope.launch {
+//            preferences.data.collect { dataStore ->
+//                val pesoKey = stringPreferencesKey("peso")
+//                val peso = dataStore[pesoKey]
+//                println("Peso: $peso")
+//            }
+//        }
+//    }
 
     fun saveAlturaPreferences(altura: Int){
         viewModelScope.launch {
             preferences.edit { dataStore ->
-                val pesoKey = stringPreferencesKey("altura")
-                dataStore[pesoKey] = "$altura cm"
+                val alturaKey = stringPreferencesKey("altura")
+                dataStore[alturaKey] = "$altura cm"
             }
         }
     }
+
+//    fun getAlturaPreferences(){
+//        viewModelScope.launch {
+//            preferences.data.collect{ dataStore ->
+//                val alturaKey = stringPreferencesKey("altura")
+//                val altura = dataStore[alturaKey]
+//                println(altura)
+//            }
+//        }
+//    }
 }
