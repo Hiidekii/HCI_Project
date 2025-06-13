@@ -142,7 +142,20 @@ fun PesoScreen(
                     enabled = true,
                     isLoading = false,
                     onClick = {
-                        userDataViewModel.savePesoPreferences(pesoSeleccionadoLb)
+                        userDataViewModel.savePesoPreferences(
+                            when(unidad){
+                                "kg" -> {
+                                    pesoSeleccionadoKg
+                                }
+                                "lb" -> {
+                                    pesoSeleccionadoLb
+                                }
+                                else -> {
+                                    pesoSeleccionadoKg
+                                }
+                            },
+                            unidad
+                        )
                         onNextClick()
                     }
                 )
