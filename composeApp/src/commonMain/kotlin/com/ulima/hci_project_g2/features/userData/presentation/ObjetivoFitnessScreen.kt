@@ -15,10 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,7 +32,6 @@ import androidx.compose.ui.unit.sp
 import com.ulima.hci_project_g2.core.presentation.PrimaryBlack
 import com.ulima.hci_project_g2.core.presentation.PrimaryDarkGray
 import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
-import com.ulima.hci_project_g2.core.presentation.SecondaryGray
 import com.ulima.hci_project_g2.core.presentation.TertiaryGray
 import com.ulima.hci_project_g2.core.presentation.components.CustomRadio
 import com.ulima.hci_project_g2.core.presentation.components.MyActionButton
