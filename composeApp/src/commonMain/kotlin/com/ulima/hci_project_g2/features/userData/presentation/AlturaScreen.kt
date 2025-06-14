@@ -51,7 +51,7 @@ fun AlturaScreen(
         topBar = {
             UlimaFitTopBar(
                 titulo = "Evaluación",
-                pasoActual = 2,
+                pasoActual = 3,
                 onBackClick = { onReturnClick() },
                 containerColor = PrimaryOrange
             )
@@ -70,7 +70,7 @@ fun AlturaScreen(
                 verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
                 Text(
-                    text = "¿Cuál es tu peso?",
+                    text = "¿Cuál es tu altura?",
                     fontWeight = FontWeight.Bold,
                     fontSize = 40.sp,
                     color = PrimaryWhite

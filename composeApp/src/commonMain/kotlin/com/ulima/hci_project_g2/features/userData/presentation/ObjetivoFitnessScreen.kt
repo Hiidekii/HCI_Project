@@ -49,108 +49,108 @@ fun ObjetivoFitnessScreen(
     onReturnClick: () -> Unit,
     onNextClick: () -> Unit
 ){
-    var selectedObjective by remember { mutableStateOf<Int?>(null) }
-    val objetivos = listOf(
-        ObjetivoFitness(
-            icono = Res.drawable.ic_balanza,
-            nombre = "Quiero perder peso"
-        ),
-        ObjetivoFitness(
-            icono = Res.drawable.ic_pesa,
-            nombre = "Quiero ganar volumen"
-        ),
-        ObjetivoFitness(
-            icono = Res.drawable.ic_heart,
-            nombre = "Quiero ganar resistencia"
-        ),
-        ObjetivoFitness(
-            icono = Res.drawable.ic_celular,
-            nombre = "¡Probando la aplicación!"
-        )
-    )
-    println("index: $selectedObjective")
-
-    Scaffold(
-        topBar = {
-            UlimaFitTopBar(
-                titulo = "Evaluación",
-                pasoActual = 6,
-                onBackClick = { onReturnClick() }
+        var selectedObjective by remember { mutableStateOf<Int?>(null) }
+        val objetivos = listOf(
+            ObjetivoFitness(
+                icono = Res.drawable.ic_balanza,
+                nombre = "Quiero perder peso"
+            ),
+            ObjetivoFitness(
+                icono = Res.drawable.ic_pesa,
+                nombre = "Quiero ganar volumen"
+            ),
+            ObjetivoFitness(
+                icono = Res.drawable.ic_heart,
+                nombre = "Quiero ganar resistencia"
+            ),
+            ObjetivoFitness(
+                icono = Res.drawable.ic_celular,
+                nombre = "¡Probando la aplicación!"
             )
-        },
-        containerColor = PrimaryWhite
-    ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(horizontal = 32.dp, vertical = 50.dp)
-        ) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text(
-                    text = "¿Cuál es tu objetivo/meta de fitness?",
-                    fontWeight = FontWeight.Black,
-                    fontSize = 36.sp,
-                    color = PrimaryBlack,
-                    textAlign = TextAlign.Center,
-                    lineHeight = 40.sp,
+        )
+        println("index: $selectedObjective")
+
+        Scaffold(
+            topBar = {
+                UlimaFitTopBar(
+                    titulo = "Evaluación",
+                    pasoActual = 6,
+                    onBackClick = { onReturnClick() }
                 )
-                Spacer(modifier = Modifier.height(24.dp))
-                objetivos.forEachIndexed { index, obj ->
-                    Card(
-                        shape = RoundedCornerShape(16.dp),
-                        colors = CardDefaults.cardColors(containerColor = TertiaryGray),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { selectedObjective = index + 1 }
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
+            },
+            containerColor = PrimaryWhite
+        ) { paddingValues ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(horizontal = 32.dp, vertical = 50.dp)
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Text(
+                        text = "¿Cuál es tu objetivo/meta de fitness?",
+                        fontWeight = FontWeight.Black,
+                        fontSize = 36.sp,
+                        color = PrimaryBlack,
+                        textAlign = TextAlign.Center,
+                        lineHeight = 40.sp,
+                    )
+                    Spacer(modifier = Modifier.height(24.dp))
+                    objetivos.forEachIndexed { index, obj ->
+                        Card(
+                            shape = RoundedCornerShape(16.dp),
+                            colors = CardDefaults.cardColors(containerColor = TertiaryGray),
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(vertical = 18.dp, horizontal = 22.dp )
-
+                                .clickable { selectedObjective = index + 1 }
                         ) {
-                            Icon(
-                                painter = painterResource(obj.icono),
-                                contentDescription = obj.nombre,
-                                modifier = Modifier.size(24.dp),
-                                tint = PrimaryDarkGray
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = obj.nombre,
-                                modifier = Modifier.weight(1f),
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 18.dp, horizontal = 22.dp )
+
+                            ) {
+                                Icon(
+                                    painter = painterResource(obj.icono),
+                                    contentDescription = obj.nombre,
+                                    modifier = Modifier.size(24.dp),
+                                    tint = PrimaryDarkGray
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(
+                                    text = obj.nombre,
+                                    modifier = Modifier.weight(1f),
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
 //                            RadioButton(
 //                                selected = selectedObjective == index + 1,
 //                                onClick = { selectedObjective = index + 1 }
 //                            )
-                            CustomRadio(
-                                selected = selectedObjective == index + 1,
-                                onClick  = { selectedObjective = index + 1 }
-                            )
+                                CustomRadio(
+                                    selected = selectedObjective == index + 1,
+                                    onClick  = { selectedObjective = index + 1 }
+                                )
 
+                            }
                         }
                     }
+                    Spacer(modifier = Modifier.height(24.dp))
+                    MyActionButton(
+                        text = "Continuar",
+                        enabled = (selectedObjective != null),
+                        isLoading = false,
+                        onClick = {
+                            onNextClick()
+                        }
+                    )
                 }
-                Spacer(modifier = Modifier.height(24.dp))
-                MyActionButton(
-                    text = "Continuar",
-                    enabled = (selectedObjective != null),
-                    isLoading = false,
-                    onClick = {
-                        onNextClick()
-                    }
-                )
             }
         }
-    }
 }
 
 data class ObjetivoFitness(

@@ -30,7 +30,9 @@ import com.ulima.hci_project_g2.features.exercise.domain.MuscleGroup
 import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseDetailScreen
 import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseIntructionsScreen
 import com.ulima.hci_project_g2.features.userData.presentation.AlturaScreen
+import com.ulima.hci_project_g2.features.userData.presentation.CondicionFisicaScreen
 import com.ulima.hci_project_g2.features.userData.presentation.EdadScreen
+import com.ulima.hci_project_g2.features.userData.presentation.GeneroScreen
 import com.ulima.hci_project_g2.features.userData.presentation.IntroduccionScreen
 import com.ulima.hci_project_g2.features.userData.presentation.ObjetivoFitnessScreen
 import com.ulima.hci_project_g2.features.userData.presentation.PesoScreen
@@ -84,7 +86,7 @@ fun App(
 
             navigation<Route.AuthGraph>(
                 startDestination = Route.Intro
-            ){
+            ) {
                 composable<Route.Intro> {
                     IntroScreen(
                         onStartClick = {
@@ -95,8 +97,8 @@ fun App(
                 composable<Route.Login> {
                     LoginScreen(
                         onLoginClick = {
-                            navController.navigate(Route.UserDataGraph){
-                                popUpTo(Route.AuthGraph){
+                            navController.navigate(Route.UserDataGraph) {
+                                popUpTo(Route.AuthGraph) {
                                     inclusive = true
                                 }
                             }
@@ -107,7 +109,7 @@ fun App(
 
             navigation<Route.UserDataGraph>(
                 startDestination = Route.UserDataStart
-            ){
+            ) {
                 composable<Route.UserDataStart> {
                     UserDataStartScreen(
                         onNextClick = {
@@ -141,6 +143,28 @@ fun App(
                 composable<Route.Altura> {
                     AlturaScreen(
                         onNextClick = {
+                            navController.navigate(Route.CondicionFisica)
+                        },
+                        onReturnClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
+
+                composable<Route.CondicionFisica> {
+                    CondicionFisicaScreen(
+                        onNextClick = {
+                            navController.navigate(Route.Genero)
+                        },
+                        onReturnClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
+
+                composable<Route.Genero> {
+                    GeneroScreen(
+                        onNextClick = {
                             navController.navigate(Route.Objetivo)
                         },
                         onReturnClick = {
@@ -168,25 +192,25 @@ fun App(
                     )
                 }
                 val ejercicio1 = Exercise(
-                    name            = "Máquina de remo alto",
+                    name = "Máquina de remo alto",
                     duration = 9,            // 9 minutos
-                    calories    = 45,                // 45 kcal
-                    sets            = "3 × 15",
-                    muscleGroups    = listOf(
+                    calories = 45,                // 45 kcal
+                    sets = "3 × 15",
+                    muscleGroups = listOf(
                         MuscleGroup.BACK,
                         MuscleGroup.ARMS,
                         MuscleGroup.CORE
                     ),
-                    rewardPoints    = 25,
-                    instructions    = listOf(
+                    rewardPoints = 25,
+                    instructions = listOf(
                         "Ajusta el asiento y la resistencia según tu nivel.",
                         "Siéntate con la espalda recta y pies firmes en los reposapiés.",
                         "Agarra el agarre con las dos manos, extiende los brazos y tira hacia el pecho exhalando.",
                         "Vuelve despacio a la posición inicial inhalando.",
                         "Repite el movimiento de forma controlada."
                     ),
-                    image           = Res.drawable.ejercicio,
-                    gif             = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYms2c2J4amUwY2R2Zzg2amhqNDdxYndyZnNhbW1lbDV4dG1wbjh0eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qt7bBGJ8x7ZRu/giphy.gif"
+                    image = Res.drawable.ejercicio,
+                    gif = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYms2c2J4amUwY2R2Zzg2amhqNDdxYndyZnNhbW1lbDV4dG1wbjh0eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qt7bBGJ8x7ZRu/giphy.gif"
                 )
 
                 composable<Route.Ejercicio> {
@@ -240,12 +264,16 @@ fun App(
                     )
                 }
                 composable<Route.BookDetail>(
-                    enterTransition = { slideInHorizontally { initialOffset ->
-                        initialOffset
-                    } },
-                    exitTransition = { slideOutHorizontally { initialOffset ->
-                        initialOffset
-                    } }
+                    enterTransition = {
+                        slideInHorizontally { initialOffset ->
+                            initialOffset
+                        }
+                    },
+                    exitTransition = {
+                        slideOutHorizontally { initialOffset ->
+                            initialOffset
+                        }
+                    }
                 ) {
                     val selectedBookViewModel =
                         it.sharedKoinViewModel<SelectedBookViewModel>(navController)
@@ -271,7 +299,7 @@ fun App(
 }
 
 @Composable
-private inline fun <reified T: ViewModel> NavBackStackEntry.sharedKoinViewModel(
+private inline fun <reified T : ViewModel> NavBackStackEntry.sharedKoinViewModel(
     navController: NavController
 ): T {
     val navGraphRoute = destination.parent?.route ?: return koinViewModel<T>()
