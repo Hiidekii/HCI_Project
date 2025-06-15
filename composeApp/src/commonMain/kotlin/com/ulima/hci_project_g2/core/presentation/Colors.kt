@@ -15,4 +15,5 @@ val SecondaryGray = Color(0xFFacacac)
 val TertiaryGray = Color(0xFFf3f3f4)
 val PrimaryDarkGray = Color(0xFF676c75)
 val SecondaryDarkGray = Color(0xFF8B8B8D)
-
+val PrimaryLightOrange = Color(0xFFffedd5)
+val SecondaruOrange = Color(0xFFf97316)

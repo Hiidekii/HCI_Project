@@ -9,9 +9,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class UserDataViewModel (
+class UserDataViewModel(
     private val preferences: DataStore<Preferences>
-): ViewModel() {
+) : ViewModel() {
 
     fun saveEdadPreferences(edad: Int) {
         viewModelScope.launch {
@@ -32,7 +32,7 @@ class UserDataViewModel (
         }
     }*/
 
-    fun savePesoPreferences(peso: Int, unidad: String){
+    fun savePesoPreferences(peso: Int, unidad: String) {
         viewModelScope.launch {
             preferences.edit { dataStore ->
                 val pesoKey = stringPreferencesKey("peso")
@@ -51,7 +51,7 @@ class UserDataViewModel (
 //        }
 //    }
 
-    fun saveAlturaPreferences(altura: Int){
+    fun saveAlturaPreferences(altura: Int) {
         viewModelScope.launch {
             preferences.edit { dataStore ->
                 val alturaKey = stringPreferencesKey("altura")
@@ -60,7 +60,7 @@ class UserDataViewModel (
         }
     }
 
-//    fun getAlturaPreferences(){
+    //    fun getAlturaPreferences(){
 //        viewModelScope.launch {
 //            preferences.data.collect{ dataStore ->
 //                val alturaKey = stringPreferencesKey("altura")
@@ -69,4 +69,14 @@ class UserDataViewModel (
 //            }
 //        }
 //    }
+    fun saveGeneroPreferences(genero: String) {
+        viewModelScope.launch {
+            preferences.edit { dataStore ->
+                val generoKey = stringPreferencesKey("genero")
+                dataStore[generoKey] = "$genero"
+            }
+        }
+    }
+
 }
+
