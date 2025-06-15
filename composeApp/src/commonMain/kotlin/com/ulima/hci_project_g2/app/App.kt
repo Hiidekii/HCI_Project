@@ -1,5 +1,6 @@
 package com.ulima.hci_project_g2.app
 
+import CondicionFisicaScreen
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.material3.MaterialTheme
@@ -30,7 +31,6 @@ import com.ulima.hci_project_g2.features.exercise.domain.MuscleGroup
 import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseDetailScreen
 import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseIntructionsScreen
 import com.ulima.hci_project_g2.features.userData.presentation.AlturaScreen
-import com.ulima.hci_project_g2.features.userData.presentation.CondicionFisicaScreen
 import com.ulima.hci_project_g2.features.userData.presentation.EdadScreen
 import com.ulima.hci_project_g2.features.userData.presentation.GeneroScreen
 import com.ulima.hci_project_g2.features.userData.presentation.IntroduccionScreen

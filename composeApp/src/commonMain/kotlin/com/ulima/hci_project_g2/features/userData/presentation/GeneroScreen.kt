@@ -58,7 +58,7 @@ fun GeneroScreen (
     onReturnClick: () -> Unit,
     userDataViewModel: UserDataViewModel = koinViewModel()
 ){
-    var selectedGender by remember { mutableStateOf<  String?>(null) }
+    var selectedGender by remember { mutableStateOf<  Int?>(null) }
     Scaffold(
         topBar = {
             UlimaFitTopBar(
@@ -92,20 +92,20 @@ fun GeneroScreen (
                     GenderCard(
                         imageRes = Res.drawable.img_hombre,
                         label = "Hombre",
-                        isSelected = selectedGender == "Hombre"
-                    ) { selectedGender = "Hombre" }
+                        isSelected = selectedGender == 1
+                    ) { selectedGender = 1 }
 
                     GenderCard(
                         imageRes = Res.drawable.img_mujer,
                         label = "Mujer",
-                        isSelected = selectedGender == "Mujer"
-                    ) { selectedGender = "Mujer" }
+                        isSelected = selectedGender == 2
+                    ) { selectedGender = 2 }
 
                 Spacer(modifier = Modifier.weight(1f))
 
                 Button(
                     onClick = {
-                        selectedGender = "noEspecificado"
+                        selectedGender = 3
                         onNextClick() },
                     shape = RoundedCornerShape(25.dp),
                     colors = ButtonDefaults.buttonColors(

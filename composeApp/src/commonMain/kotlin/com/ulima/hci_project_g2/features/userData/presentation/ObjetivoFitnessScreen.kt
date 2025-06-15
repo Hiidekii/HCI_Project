@@ -43,11 +43,13 @@ import hci_project.composeapp.generated.resources.ic_heart
 import hci_project.composeapp.generated.resources.ic_pesa
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun ObjetivoFitnessScreen(
     onReturnClick: () -> Unit,
-    onNextClick: () -> Unit
+    onNextClick: () -> Unit,
+    userDataViewModel: UserDataViewModel = koinViewModel()
 ){
         var selectedObjective by remember { mutableStateOf<Int?>(null) }
         val objetivos = listOf(
@@ -145,6 +147,9 @@ fun ObjetivoFitnessScreen(
                         enabled = (selectedObjective != null),
                         isLoading = false,
                         onClick = {
+                            userDataViewModel.saveObjetivoPreferences(
+                                selectedObjective!!
+                            )
                             onNextClick()
                         }
                     )
