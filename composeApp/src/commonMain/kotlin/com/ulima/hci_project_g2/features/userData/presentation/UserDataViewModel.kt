@@ -73,10 +73,20 @@ class UserDataViewModel(
         viewModelScope.launch {
             preferences.edit { dataStore ->
                 val generoKey = stringPreferencesKey("genero")
-                dataStore[generoKey] = "$genero"
+                dataStore[generoKey] = genero
             }
         }
     }
+
+//    fun getGeneroPreferences() {
+//        viewModelScope.launch {
+//            preferences.data.collect { dataStore ->
+//                val generoKey = stringPreferencesKey("genero")
+//                val genero = dataStore[generoKey]
+//                println(genero)
+//            }
+//        }
+//    }
 
 }
 
