@@ -34,9 +34,11 @@ import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
 import hci_project.composeapp.generated.resources.Res
 import hci_project.composeapp.generated.resources.img_introduccionRutina
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun IntroduccionScreen (
+fun IntroduccionScreen(
+    userDataViewModel: UserDataViewModel = koinViewModel(),
     onNextClick: () -> Unit
 ) {
     Scaffold { paddingValues ->
@@ -87,7 +89,10 @@ fun IntroduccionScreen (
                 )
                 Spacer(modifier = Modifier.height(40.dp))
                 Button(
-                    onClick = { onNextClick() },
+                    onClick = {
+                        userDataViewModel.markIntroInfoFinished()
+                        onNextClick()
+                    },
                     shape = RoundedCornerShape(25.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = PrimaryWhite,

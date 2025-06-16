@@ -47,15 +47,18 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    viewModel: HomeViewModel = koinViewModel()
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        HomeHeader()
+        HomeHeader(viewModel = viewModel)
         Spacer(modifier = Modifier.height(20.dp))
         SemanaSelector()
         Spacer(modifier = Modifier.height(16.dp))
@@ -64,12 +67,17 @@ fun HomeScreen() {
 }
 
 @Composable
-fun HomeHeader() {
+fun HomeHeader(
+    viewModel: HomeViewModel
+) {
     val currentDate = remember {
         val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
         val monthName = now.month.name.lowercase().replaceFirstChar { it.uppercase() }
         "${monthName} ${now.dayOfMonth}, ${now.year}"
     }
+
+    val state = viewModel.state
+    val name = state.name
 
     Box(
         modifier = Modifier
@@ -104,7 +112,7 @@ fun HomeHeader() {
                     fontSize = 16.sp
                 )
                 Text(
-                    text = "Hola, Luis",
+                    text = "Hola, $name",
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp

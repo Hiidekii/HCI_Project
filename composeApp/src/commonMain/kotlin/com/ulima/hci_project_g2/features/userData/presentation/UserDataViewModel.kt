@@ -2,6 +2,7 @@ package com.ulima.hci_project_g2.features.userData.presentation
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -124,5 +125,14 @@ class UserDataViewModel(
 //                        }
 //                    }
 //                }
+
+    fun markIntroInfoFinished() {
+        viewModelScope.launch {
+            preferences.edit { dataStore ->
+                val completeInfoKey = booleanPreferencesKey("introCompleta")
+                dataStore[completeInfoKey] = true
+            }
+        }
+    }
 }
 
