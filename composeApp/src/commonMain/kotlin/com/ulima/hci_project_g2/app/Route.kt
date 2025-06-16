@@ -61,4 +61,12 @@ sealed interface Route {
     @Serializable
     data object EjercicioIntrucciones: Route
 
+    //MainApp
+
+    @Serializable
+    data object MainAppGraph
+
+    @Serializable
+    data object Home
+
 }

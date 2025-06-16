@@ -30,6 +30,7 @@ import com.ulima.hci_project_g2.features.exercise.domain.Exercise
 import com.ulima.hci_project_g2.features.exercise.domain.MuscleGroup
 import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseDetailScreen
 import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseIntructionsScreen
+import com.ulima.hci_project_g2.features.mainApp.MainWrapperScreen
 import com.ulima.hci_project_g2.features.userData.presentation.AlturaScreen
 import com.ulima.hci_project_g2.features.userData.presentation.EdadScreen
 import com.ulima.hci_project_g2.features.userData.presentation.GeneroScreen
@@ -48,40 +49,11 @@ import org.koin.compose.viewmodel.koinViewModel
 fun App(
     prefs: DataStore<Preferences>
 ) {
-    /*val counter by prefs
-        .data
-        .map {
-            val counterKey = intPreferencesKey("counter")
-            it[counterKey] ?: 0
-        }
-        .collectAsState(0)
-    val scope = rememberCoroutineScope()*/
     MaterialTheme {
-        /*Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = counter.toString(),
-                textAlign = TextAlign.Center,
-                fontSize = 50.sp
-            )
-            Button(onClick = {
-                scope.launch {
-                    prefs.edit { dataStore ->
-                        val counterKey = intPreferencesKey("counter")
-                        dataStore[counterKey] = counter + 1
-                    }
-                }
-            }){
-                Text(text = "Increment")
-            }
-        }*/
         val navController = rememberNavController()
         NavHost(
             navController = navController,
-            startDestination = Route.UserDataGraph //Route.AuthGraph
+            startDestination = Route.MainAppGraph //Route.AuthGraph
         ) {
 
             navigation<Route.AuthGraph>(
@@ -187,7 +159,11 @@ fun App(
                 composable<Route.IntroduccionRutina> {
                     IntroduccionScreen(
                         onNextClick = {
-                            navController.navigate(Route.Ejercicio)
+                            navController.navigate(Route.MainAppGraph) {
+                                popUpTo(Route.UserDataGraph) {
+                                    inclusive = true
+                                }
+                            }
                         }
                     )
                 }
@@ -235,6 +211,14 @@ fun App(
                             navController.popBackStack()
                         }
                     )
+                }
+            }
+
+            navigation<Route.MainAppGraph>(
+                startDestination = Route.Home
+            ){
+                composable<Route.Home> {
+                    MainWrapperScreen()
                 }
             }
 

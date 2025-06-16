@@ -6,8 +6,8 @@ class UsuarioRepository {
 
     //Lista de usuarios
     private val usuarios = listOf(
-        Usuario(usuario = "20220522", contrasena = "ulima123"),
-        Usuario(usuario = "20212604", contrasena = "ulima123")
+        Usuario(usuario = "20220522", contrasena = "ulima123", nombre = "Luis"),
+        Usuario(usuario = "20212604", contrasena = "ulima123", nombre = "Hideki")
     )
 
     //Verificar si las credenciales son validas
