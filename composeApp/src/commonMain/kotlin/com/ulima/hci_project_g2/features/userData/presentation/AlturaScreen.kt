@@ -45,7 +45,7 @@ fun AlturaScreen(
     onReturnClick: () -> Unit,
     userDataViewModel: UserDataViewModel = koinViewModel()
 ) {
-    var alturaSeleccioanda by remember { mutableStateOf(74) }
+    var alturaSeleccioanda by remember { mutableStateOf(149) }
 
     Scaffold(
         topBar = {
@@ -101,8 +101,8 @@ fun AlturaScreen(
 fun AlturaRulerPicker(
     alturaSeleccionada: Int,
     onAlturaSeleccionada: (Int) -> Unit,
-    min: Int = 30,
-    max: Int = 200
+    min: Int = 130,
+    max: Int = 210
 ) {
     val items = (min..max).toList()
     val listState = rememberLazyListState()
@@ -145,7 +145,7 @@ fun AlturaRulerPicker(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "$alturaSeleccionada Lbs",
+            text = "$alturaSeleccionada cm",
             fontSize = 44.sp,
             fontWeight = FontWeight.Bold,
             color = PrimaryWhite
