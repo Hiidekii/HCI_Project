@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.features.mainApp
+package com.ulima.hci_project_g2.features.mainApp.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,8 +10,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.ulima.hci_project_g2.features.mainApp.components.UlimaFitBottomBar
-import com.ulima.hci_project_g2.features.mainApp.home.HomeScreen
+import com.ulima.hci_project_g2.features.mainApp.presentation.components.UlimaFitBottomBar
+import com.ulima.hci_project_g2.features.mainApp.presentation.home.HomeScreen
 
 @Composable
 fun MainWrapperScreen() {

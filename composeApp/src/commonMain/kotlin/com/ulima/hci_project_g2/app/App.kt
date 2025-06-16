@@ -30,7 +30,7 @@ import com.ulima.hci_project_g2.features.exercise.domain.Exercise
 import com.ulima.hci_project_g2.features.exercise.domain.MuscleGroup
 import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseDetailScreen
 import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseIntructionsScreen
-import com.ulima.hci_project_g2.features.mainApp.MainWrapperScreen
+import com.ulima.hci_project_g2.features.mainApp.presentation.MainWrapperScreen
 import com.ulima.hci_project_g2.features.userData.presentation.AlturaScreen
 import com.ulima.hci_project_g2.features.userData.presentation.EdadScreen
 import com.ulima.hci_project_g2.features.userData.presentation.GeneroScreen

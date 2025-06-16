@@ -14,5 +14,4 @@ class UsuarioRepository {
     fun validarLogin(usuario: String, contrasena: String): Boolean {
         return usuarios.any { it.usuario == usuario && it.contrasena == contrasena }
     }
-
 }

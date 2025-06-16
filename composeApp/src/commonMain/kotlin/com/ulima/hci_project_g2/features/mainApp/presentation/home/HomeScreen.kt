@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.features.mainApp.home
+package com.ulima.hci_project_g2.features.mainApp.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -128,20 +127,39 @@ fun SemanaSelector() {
             fontSize = 24.sp,
             color = PrimaryBlack
         )
+
         Spacer(modifier = Modifier.height(10.dp))
-        LazyRow(
-            contentPadding = PaddingValues(horizontal = 16.dp)
-        ) {
+
+        LazyRow(contentPadding = PaddingValues(horizontal = 16.dp)) {
             itemsIndexed(semanas) { index, semana ->
-                Text(
-                    text = semana,
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .padding(end = 30.dp)
-                        .clickable { selected = index },
-                    fontWeight = if (selected == index) FontWeight.Bold else FontWeight.Normal,
-                    color = if (selected == index) PrimaryBlack else Color.Gray,
-                    fontSize = 20.sp
-                )
+                        .padding(end = 24.dp)
+                        .clickable { selected = index }
+                ) {
+                    Text(
+                        text = semana,
+                        fontWeight = if (selected == index) FontWeight.Bold else FontWeight.Normal,
+                        color = if (selected == index) PrimaryBlack else Color.Gray,
+                        fontSize = 18.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    // Línea inferior solo si está seleccionado
+                    if (selected == index) {
+                        Box(
+                            modifier = Modifier
+                                .height(3.dp)
+                                .width(40.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(PrimaryOrange)
+                        )
+                    } else {
+                        Spacer(modifier = Modifier.height(3.dp))
+                    }
+                }
             }
         }
     }
@@ -163,10 +181,9 @@ fun RutinaLista() {
                     text = "DÍA ${index + 1}",
                     color = Color.Gray,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 12.sp,
+                    fontSize = 18.sp,
                     modifier = Modifier
                         .graphicsLayer { rotationZ = -90f }
-                        .padding(bottom = 4.dp)
                 )
                 
                 Column(
@@ -197,7 +214,7 @@ fun RutinaLista() {
                     Box(
                         modifier = Modifier
                             .width(2.dp)
-                            .height(150.dp) // igual a la altura de tu RutinaCard
+                            .height(180.dp) // igual a la altura de tu RutinaCard
                             .background(Color.LightGray)
                     )
                 }

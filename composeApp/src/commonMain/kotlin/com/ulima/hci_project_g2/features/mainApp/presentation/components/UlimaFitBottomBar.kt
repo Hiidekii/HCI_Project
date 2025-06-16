@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.features.mainApp.components
+package com.ulima.hci_project_g2.features.mainApp.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
