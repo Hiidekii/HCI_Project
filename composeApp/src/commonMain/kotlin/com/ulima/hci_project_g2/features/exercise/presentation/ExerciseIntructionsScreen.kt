@@ -1,22 +1,12 @@
 package com.ulima.hci_project_g2.features.exercise.presentation
 
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,139 +14,137 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.compose.AsyncImage
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
 import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
-import com.ulima.hci_project_g2.features.exercise.domain.Exercise
 import com.ulima.hci_project_g2.features.exercise.presentation.components.ExerciseTopBar
+import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun ExerciseIntructionsScreen (
-    exercise: Exercise,
+fun ExerciseIntructionsScreen(
+    routineName: String,
+    exerciseIndex: Int,
     onNextClick: () -> Unit,
     onBackClick: () -> Unit
-){
-    Box(
-        modifier = Modifier.fillMaxSize()
-    )
+) {
+    val exercise = RutinasRepository().obtenerEjerciciosPorRutina(routineName).getOrNull(exerciseIndex)
+        ?: return
 
     Scaffold(
         topBar = {
-            ExerciseTopBar(
-                onBackClick = onBackClick,
-                title = exercise.name
-            )
+            ExerciseTopBar(onBackClick = onBackClick, title = exercise.name)
         },
-        containerColor = Color.Transparent
+        containerColor = Color.Black
     ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        )
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 36.dp, vertical = 32.dp),
+                .padding(innerPadding)
+                .padding(horizontal = 24.dp, vertical = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Badge de puntos totales
-            Box(
+            // TARJETA BLANCA
+            Column(
                 modifier = Modifier
-                    .border(
-                        width = 1.dp,
-                        color = Color.White,
-                        shape = RoundedCornerShape(10.dp)
-                    )
-                    .padding(horizontal = 22.dp, vertical = 14.dp)
+                    .fillMaxWidth()
+                    .heightIn(min = 400.dp) // aquí se agranda el área blanca
+                    .clip(RoundedCornerShape(28.dp))
+                    .background(Color.White)
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+
             ) {
+                Image(
+                    painter = painterResource(exercise.gif),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(220.dp)
+                        .clip(RoundedCornerShape(20.dp)),
+                    contentScale = ContentScale.Crop
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = exercise.sets,
+                    color = Color.Gray,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
                 Text(
                     text = "${exercise.rewardPoints} Total",
-                    fontSize = 20.sp,
-                    color = Color.White,
-                    fontWeight = FontWeight.Medium,
+                    color = Color.Gray,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 14.sp
                 )
             }
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-            // AsyncImage for GIF
-            AsyncImage(
-                model = exercise.gif,
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .clip(RoundedCornerShape(16.dp)),
-                contentScale = ContentScale.Crop
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Scrollable instructions area
             Column(
                 modifier = Modifier
                     .weight(1f)
                     .verticalScroll(rememberScrollState())
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.Start
+                    .fillMaxWidth()
             ) {
-                // Example instructions: replace with real content as needed
-                Row(verticalAlignment = Alignment.Top) {
-                    Text(
-                        text = "1.",
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        fontSize = 18.sp,
-                        modifier = Modifier.padding(end = 8.dp)
-                    )
-                    Text(
-                        text = "Primera instrucción del ejercicio.",
-                        color = Color.White,
-                        fontSize = 18.sp
-                    )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(verticalAlignment = Alignment.Top) {
-                    Text(
-                        text = "2.",
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        fontSize = 18.sp,
-                        modifier = Modifier.padding(end = 8.dp)
-                    )
-                    Text(
-                        text = "Segunda instrucción del ejercicio.",
-                        color = Color.White,
-                        fontSize = 18.sp
-                    )
+                Text(
+                    text = "\uD83D\uDCAA Cómo usar la ${exercise.name}",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                exercise.instructions.forEachIndexed { index, step ->
+                    Row(
+                        verticalAlignment = Alignment.Top,
+                        modifier = Modifier.padding(bottom = 12.dp)
+                    ) {
+                        Text(
+                            "${index + 1}",
+                            color = Color.White,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(end = 8.dp)
+                        )
+                        Text(
+                            text = step,
+                            color = Color.White,
+                            fontSize = 16.sp,
+                            lineHeight = 20.sp
+                        )
+                    }
                 }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
-                onClick = { onNextClick() },
-                shape = RoundedCornerShape(25.dp),
+                onClick = onNextClick,
+                shape = RoundedCornerShape(20.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = PrimaryOrange,
                     contentColor = PrimaryWhite
                 )
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = "Completar",
-                        fontSize = 23.sp,
-                        modifier = Modifier.padding(horizontal = 98.dp, vertical = 9.dp),
-                    )
-                }
+                Text(
+                    "Completar",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
             }
-            Spacer(modifier = Modifier.height(50.dp))
+
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
-
 }

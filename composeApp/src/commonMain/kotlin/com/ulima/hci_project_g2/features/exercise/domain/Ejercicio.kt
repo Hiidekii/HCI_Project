@@ -11,7 +11,7 @@ data class Exercise(
     val rewardPoints: Int,
     val instructions: List<String>,
     val image : DrawableResource,
-    val gif : String
+    val gif : DrawableResource,
 )
 
 

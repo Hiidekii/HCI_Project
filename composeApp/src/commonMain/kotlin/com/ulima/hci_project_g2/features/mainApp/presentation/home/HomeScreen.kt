@@ -1,57 +1,39 @@
 package com.ulima.hci_project_g2.features.mainApp.presentation.home
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.*
 import com.ulima.hci_project_g2.core.presentation.PrimaryBlack
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
-import hci_project.composeapp.generated.resources.Res
-import hci_project.composeapp.generated.resources.img_introduccionRutina
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
+import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    onNavigateToExerciseDetail: (String, Int) -> Unit,
+    onNavigateToRoutineDetail: (String) -> Unit
+) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
@@ -59,7 +41,9 @@ fun HomeScreen() {
         Spacer(modifier = Modifier.height(20.dp))
         SemanaSelector()
         Spacer(modifier = Modifier.height(16.dp))
-        RutinaLista()
+        RutinaLista(onRoutineClick = { routineName ->
+            onNavigateToRoutineDetail(routineName)
+        })
     }
 }
 
@@ -68,7 +52,7 @@ fun HomeHeader() {
     val currentDate = remember {
         val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
         val monthName = now.month.name.lowercase().replaceFirstChar { it.uppercase() }
-        "${monthName} ${now.dayOfMonth}, ${now.year}"
+        "$monthName ${now.dayOfMonth}, ${now.year}"
     }
 
     Box(
@@ -98,17 +82,8 @@ fun HomeHeader() {
             }
             Spacer(modifier = Modifier.width(16.dp))
             Column {
-                Text(
-                    text = currentDate,
-                    color = Color.LightGray,
-                    fontSize = 16.sp
-                )
-                Text(
-                    text = "Hola, Luis",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 30.sp
-                )
+                Text(text = currentDate, color = Color.LightGray, fontSize = 16.sp)
+                Text(text = "Hola, Luis", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 30.sp)
             }
         }
     }
@@ -120,16 +95,8 @@ fun SemanaSelector() {
     var selected by remember { mutableStateOf(1) }
 
     Column {
-        Text(
-            text = "Mi Rutina",
-            modifier = Modifier.padding(start = 16.dp),
-            fontWeight = FontWeight.Bold,
-            fontSize = 24.sp,
-            color = PrimaryBlack
-        )
-
+        Text("Mi Rutina", modifier = Modifier.padding(start = 16.dp), fontWeight = FontWeight.Bold, fontSize = 24.sp, color = PrimaryBlack)
         Spacer(modifier = Modifier.height(10.dp))
-
         LazyRow(contentPadding = PaddingValues(horizontal = 16.dp)) {
             itemsIndexed(semanas) { index, semana ->
                 Column(
@@ -144,10 +111,7 @@ fun SemanaSelector() {
                         color = if (selected == index) PrimaryBlack else Color.Gray,
                         fontSize = 18.sp
                     )
-
                     Spacer(modifier = Modifier.height(6.dp))
-
-                    // Línea inferior solo si está seleccionado
                     if (selected == index) {
                         Box(
                             modifier = Modifier
@@ -166,32 +130,30 @@ fun SemanaSelector() {
 }
 
 @Composable
-fun RutinaLista() {
-    val rutinas = listOf(
-        Triple("Fuerza superior 1", "https://via.placeholder.com/150", Pair("55min", "412kcal")),
-        Triple("Fuerza inferior 1", "https://via.placeholder.com/150", Pair("45min", "370kcal")),
-        Triple("Cardio explosivo", "https://via.placeholder.com/150", Pair("25min", "450kcal"))
-    )
+fun RutinaLista(onRoutineClick: (String) -> Unit) {
+    val rutinas = remember { RutinasRepository().obtenerRutinas() }
 
-    LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
+    LazyColumn(
+        contentPadding = PaddingValues(
+            start = 16.dp,
+            end = 16.dp,
+            top = 8.dp,
+            bottom = 100.dp // espacio para el BottomBar
+        )
+    ) {
         itemsIndexed(rutinas) { index, rutina ->
             Row(verticalAlignment = Alignment.Top) {
-                // Texto rotado del día
                 Text(
                     text = "DÍA ${index + 1}",
                     color = Color.Gray,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
-                    modifier = Modifier
-                        .graphicsLayer { rotationZ = -90f }
+                    modifier = Modifier.graphicsLayer { rotationZ = -90f }
                 )
-                
                 Column(
-                    modifier = Modifier
-                        .width(40.dp),
+                    modifier = Modifier.width(40.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Círculo con ícono (alineado arriba)
                     Box(
                         modifier = Modifier
                             .size(24.dp)
@@ -200,63 +162,48 @@ fun RutinaLista() {
                         contentAlignment = Alignment.Center
                     ) {
                         if (index == 0) {
-                            Icon(
-                                imageVector = Icons.Default.PlayArrow,
-                                contentDescription = "Play",
-                                tint = Color.White,
-                                modifier = Modifier.size(16.dp)
-                            )
+                            Icon(Icons.Default.PlayArrow, contentDescription = "Play", tint = Color.White, modifier = Modifier.size(16.dp))
                         }
                     }
-
-                    // Línea que baja desde el círculo
                     Spacer(modifier = Modifier.height(4.dp))
                     Box(
                         modifier = Modifier
                             .width(2.dp)
-                            .height(180.dp) // igual a la altura de tu RutinaCard
+                            .height(180.dp)
                             .background(Color.LightGray)
                     )
                 }
-
                 Spacer(modifier = Modifier.width(8.dp))
-
                 RutinaCard(
-                    nombre = rutina.first,
-                    imageUrl = rutina.second,
-                    duracion = rutina.third.first,
-                    calorias = rutina.third.second
+                    nombre = rutina.nombre,
+                    image = rutina.imagen,
+                    duracion = rutina.duracion,
+                    calorias = rutina.calorias,
+                    onClick = { onRoutineClick(rutina.nombre) }
                 )
             }
-
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
 
 @Composable
-fun RutinaCard(
-    nombre: String,
-    imageUrl: String,
-    duracion: String,
-    calorias: String
-) {
+fun RutinaCard(nombre: String, image: DrawableResource, duracion: String, calorias: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(200.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(Color.DarkGray)
+            .clickable { onClick() }
     ) {
-        // Puedes usar Coil si estás en Android para cargar imageUrl
         Image(
-            painter = painterResource(Res.drawable.img_introduccionRutina), // cámbialo si usas Coil
+            painter = painterResource(image),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
             alpha = 0.9f
         )
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -271,15 +218,9 @@ fun RutinaCard(
                 Text(text = calorias, color = Color.White, fontWeight = FontWeight.Bold)
             }
             Column {
-                Text(
-                    text = nombre,
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp
-                )
+                Text(text = nombre, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 18.sp)
                 Text(text = "5 Ejercicios", color = Color.White)
             }
         }
     }
 }
-

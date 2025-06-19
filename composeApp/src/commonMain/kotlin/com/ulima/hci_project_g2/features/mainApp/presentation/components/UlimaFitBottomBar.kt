@@ -2,15 +2,7 @@ package com.ulima.hci_project_g2.features.mainApp.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -40,7 +32,7 @@ fun UlimaFitBottomBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp) // Altura similar a NavigationBar
+            .height(100.dp)
             .background(Color.Black),
         contentAlignment = Alignment.Center
     ) {
@@ -55,7 +47,9 @@ fun UlimaFitBottomBar(
                 Row(
                     modifier = Modifier
                         .clip(RoundedCornerShape(24.dp))
-                        .clickable { onItemSelected(index) }
+                        .clickable {
+                            onItemSelected(index)
+                        }
                         .background(if (selectedIndex == index) Color(0xFFFF6F00) else Color.Transparent)
                         .padding(horizontal = 12.dp, vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically
