@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.features.exercise.presentation.components
+package com.ulima.hci_project_g2.features.mainApp.presentation.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -17,7 +17,8 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun ExerciseTopBar(
     onBackClick: () -> Unit,
-    title: String
+    title: String,
+    color: Color = Color.White
 ) {
     CenterAlignedTopAppBar(
         navigationIcon = {
@@ -37,7 +38,7 @@ fun ExerciseTopBar(
             }
         },
         title = {
-            Text(text = title, color = Color.White)
+            Text(text = title, color = color)
         },
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
     )

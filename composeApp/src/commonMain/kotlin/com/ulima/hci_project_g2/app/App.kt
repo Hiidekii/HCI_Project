@@ -20,17 +20,14 @@ import com.ulima.hci_project_g2.book.presentation.book_list.BookListScreenRoot
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListViewModel
 import com.ulima.hci_project_g2.features.auth.presentation.intro.IntroScreen
 import com.ulima.hci_project_g2.features.auth.presentation.login.LoginScreen
-import com.ulima.hci_project_g2.features.profile.presentation.ProfileScreen
-import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseDetailScreen
-import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseIntructionsScreen
-import com.ulima.hci_project_g2.features.exercise.presentation.ExerciseCompletedScreen
-import com.ulima.hci_project_g2.features.mainApp.presentation.MainWrapperScreen
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExerciseDetailScreen
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExerciseIntructionsScreen
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExerciseCompletedScreen
 import com.ulima.hci_project_g2.features.userData.presentation.*
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
-import hci_project.composeapp.generated.resources.Res
-import hci_project.composeapp.generated.resources.*
+import com.ulima.hci_project_g2.features.mainApp.presentation.home.RoutineDetailScreen
 
 @Composable
 @Preview

@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.features.exercise.presentation
+package com.ulima.hci_project_g2.features.mainApp.presentation.exercise
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,12 +14,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
 import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
-import com.ulima.hci_project_g2.features.exercise.presentation.components.ExerciseTopBar
+import com.ulima.hci_project_g2.features.mainApp.presentation.components.ExerciseTopBar
 import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
 import org.jetbrains.compose.resources.painterResource
 

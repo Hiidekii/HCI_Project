@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.features.userData.presentation
+package com.ulima.hci_project_g2.features.mainApp.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -9,10 +9,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,7 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
-import com.ulima.hci_project_g2.features.exercise.domain.Exercise
+import com.ulima.hci_project_g2.features.mainApp.domain.Exercise
+import com.ulima.hci_project_g2.features.mainApp.presentation.components.ExerciseTopBar
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -37,33 +36,11 @@ fun RoutineDetailScreen(
 ) {
     Scaffold(
         topBar = {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(42.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(Color(0xFFE0E0E0))
-                        .clickable { onBackClick() },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back",
-                        tint = Color.Black
-                    )
-                }
-                Spacer(modifier = Modifier.width(16.dp))
-                Text(
-                    text = routineName,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontSize = 22.sp
-                )
-            }
+            ExerciseTopBar(
+                onBackClick = onBackClick,
+                title = routineName,
+                color = Color.Black
+            )
         },
         containerColor = Color.White
     ) { innerPadding ->

@@ -1,14 +1,14 @@
-package com.ulima.hci_project_g2.features.mainApp.presentation
+package com.ulima.hci_project_g2.app
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.ulima.hci_project_g2.app.Route
 import com.ulima.hci_project_g2.features.mainApp.presentation.components.UlimaFitBottomBar
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.home.HomeScreen
-import com.ulima.hci_project_g2.features.profile.presentation.ProfileScreen
+import com.ulima.hci_project_g2.features.mainApp.presentation.profile.ProfileScreen
 
 @Composable
 fun MainWrapperScreen(navController: NavController) {
@@ -33,7 +33,11 @@ fun MainWrapperScreen(navController: NavController) {
             )
 
             1 -> {
-                navController.navigate("routineDetail/Fuerza superior 1")
+                ExercisesScreen(
+                    onExerciseClick = {
+
+                    }
+                )
             }
 
             2 -> ProfileScreen(

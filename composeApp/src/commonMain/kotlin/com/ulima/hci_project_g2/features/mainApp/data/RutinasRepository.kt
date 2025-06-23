@@ -1,6 +1,7 @@
 package com.ulima.hci_project_g2.features.mainApp.data
 
-import com.ulima.hci_project_g2.features.exercise.domain.*
+import com.ulima.hci_project_g2.features.mainApp.domain.Exercise
+import com.ulima.hci_project_g2.features.mainApp.domain.MuscleGroup
 import com.ulima.hci_project_g2.features.mainApp.domain.Rutina
 import hci_project.composeapp.generated.resources.Res
 import hci_project.composeapp.generated.resources.*

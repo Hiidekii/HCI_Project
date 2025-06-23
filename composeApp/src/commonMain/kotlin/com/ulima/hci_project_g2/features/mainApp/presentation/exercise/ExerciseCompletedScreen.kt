@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.features.exercise.presentation
+package com.ulima.hci_project_g2.features.mainApp.presentation.exercise
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn

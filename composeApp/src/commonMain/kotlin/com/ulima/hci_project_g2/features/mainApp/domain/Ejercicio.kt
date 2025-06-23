@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.features.exercise.domain
+package com.ulima.hci_project_g2.features.mainApp.domain
 
 import org.jetbrains.compose.resources.DrawableResource
 

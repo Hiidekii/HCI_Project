@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.features.exercise.presentation
+package com.ulima.hci_project_g2.features.mainApp.presentation.exercise
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
 import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
-import com.ulima.hci_project_g2.features.exercise.presentation.components.ExerciseTopBar
+import com.ulima.hci_project_g2.features.mainApp.presentation.components.ExerciseTopBar
 import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
 import org.jetbrains.compose.resources.painterResource
 
@@ -100,9 +100,15 @@ fun ExerciseDetailScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 InfoBlock("${exercise.duration}min", "Tiempo")
-                Divider(color = Color.White, modifier = Modifier.height(40.dp).width(1.dp))
+                HorizontalDivider(
+                    modifier = Modifier.height(40.dp).width(1.dp),
+                    color = Color.White
+                )
                 InfoBlock("${exercise.calories}kcal", "Calorías")
-                Divider(color = Color.White, modifier = Modifier.height(40.dp).width(1.dp))
+                HorizontalDivider(
+                    modifier = Modifier.height(40.dp).width(1.dp),
+                    color = Color.White
+                )
                 InfoBlock(exercise.sets, "Sets")
             }
 

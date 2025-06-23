@@ -1,13 +1,27 @@
-package com.ulima.hci_project_g2.features.profile.presentation
+package com.ulima.hci_project_g2.features.mainApp.presentation.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,11 +31,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ulima.hci_project_g2.features.profile.presentation.components.ProfileChart
+import com.ulima.hci_project_g2.features.mainApp.presentation.profile.components.ProfileChart
 import hci_project.composeapp.generated.resources.Res
 import hci_project.composeapp.generated.resources.ic_trofeo_v2
 import hci_project.composeapp.generated.resources.img_profile
-import hci_project.composeapp.generated.resources.img_puntos
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -44,6 +57,19 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
+            IconButton(
+                onClick = { /* TODO: Acción de logout */ },
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(16.dp)
+                    .background(Color(0x55000000), shape = CircleShape)
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+                    contentDescription = "Cerrar sesión",
+                    tint = Color.White
+                )
+            }
             Column(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
