@@ -31,13 +31,22 @@ import com.ulima.hci_project_g2.features.mainApp.presentation.home.RoutineDetail
 
 @Composable
 @Preview
-fun App(prefs: DataStore<Preferences>) {
+fun App(
+    prefs: DataStore<Preferences>,
+    appViewModel: AppViewModel = koinViewModel()
+) {
     MaterialTheme {
         val navController = rememberNavController()
+        val state = appViewModel.state
+        val startDestination = when {
+            !state.isLogged -> Route.AuthGraph
+            !state.hasCompleteIntro -> Route.UserDataGraph
+            else -> Route.MainAppGraph
+        }
 
         NavHost(
             navController = navController,
-            startDestination = Route.AuthGraph
+            startDestination = startDestination
         ) {
             // --- AUTH FLOW ---
             navigation<Route.AuthGraph>(startDestination = Route.Intro) {

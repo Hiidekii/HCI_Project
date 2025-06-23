@@ -43,7 +43,7 @@ fun HomeScreen(
             .fillMaxSize()
             .background(Color.White)
     ) {
-        HomeHeader()
+        HomeHeader(homeViewModel = homeViewModel)
         Spacer(
             modifier = Modifier.height(20.dp)
         )

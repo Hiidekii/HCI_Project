@@ -26,18 +26,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ulima.hci_project_g2.core.presentation.PrimaryBlack
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
 @Composable
-fun HomeHeader() {
+fun HomeHeader(
+    homeViewModel: HomeViewModel
+) {
     val currentDate = remember {
         val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
         val monthName = now.month.name.lowercase().replaceFirstChar { it.uppercase() }
         "$monthName ${now.dayOfMonth}, ${now.year}"
     }
+
+    val state = homeViewModel.state
+    val name = state.name
 
     Box(
         modifier = Modifier
@@ -67,7 +73,7 @@ fun HomeHeader() {
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(text = currentDate, color = Color.LightGray, fontSize = 16.sp)
-                Text(text = "Hola, Luis", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 30.sp)
+                Text(text = "Hola, $name", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 30.sp)
             }
         }
     }

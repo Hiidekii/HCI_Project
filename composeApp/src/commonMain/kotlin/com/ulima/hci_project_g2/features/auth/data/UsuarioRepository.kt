@@ -10,6 +10,10 @@ class UsuarioRepository {
         Usuario(usuario = "20212604", contrasena = "ulima123", nombre = "Hideki")
     )
 
+    fun getName(usuario: String, contrasena: String): String {
+        val user = usuarios.firstOrNull { it.usuario == usuario && it.contrasena == contrasena }
+        return user?.nombre ?: "Invitado"
+    }
     //Verificar si las credenciales son validas
     fun validarLogin(usuario: String, contrasena: String): Boolean {
         return usuarios.any { it.usuario == usuario && it.contrasena == contrasena }
