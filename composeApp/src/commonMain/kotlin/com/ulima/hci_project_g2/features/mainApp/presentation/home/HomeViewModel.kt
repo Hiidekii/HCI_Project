@@ -8,7 +8,6 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
