@@ -18,6 +18,7 @@ import com.ulima.hci_project_g2.features.mainApp.data.ExerciseRepository
 import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
 import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesViewModel
 import com.ulima.hci_project_g2.features.mainApp.presentation.home.HomeViewModel
+import com.ulima.hci_project_g2.features.mainApp.presentation.profile.ProfileViewModel
 import com.ulima.hci_project_g2.features.userData.presentation.UserDataViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
@@ -46,6 +47,7 @@ val sharedModule = module {
     //ViewModels de UlimaFit
     viewModelOf(::AppViewModel)
     viewModelOf(::LoginViewModel)
+    viewModelOf(::ProfileViewModel)
     viewModelOf(::UserDataViewModel)
     viewModelOf(::HomeViewModel)
     viewModelOf(::ExercisesViewModel)

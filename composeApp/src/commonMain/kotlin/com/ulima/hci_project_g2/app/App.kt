@@ -27,20 +27,23 @@ import com.ulima.hci_project_g2.features.userData.presentation.*
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesViewModel
 import com.ulima.hci_project_g2.features.mainApp.presentation.home.RoutineDetailScreen
 
 @Composable
 @Preview
 fun App(
     prefs: DataStore<Preferences>,
-    appViewModel: AppViewModel = koinViewModel()
+    appViewModel: AppViewModel = koinViewModel(),
+    exercisesViewModel: ExercisesViewModel = koinViewModel()
 ) {
     MaterialTheme {
         val navController = rememberNavController()
-        val state = appViewModel.state
+        val stateApp = appViewModel.state
+        val stateExercises = exercisesViewModel.state
         val startDestination = when {
-            !state.isLogged -> Route.AuthGraph
-            !state.hasCompleteIntro -> Route.UserDataGraph
+            !stateApp.isLogged -> Route.AuthGraph
+            !stateApp.hasCompleteIntro -> Route.UserDataGraph
             else -> Route.MainAppGraph
         }
 
@@ -116,9 +119,14 @@ fun App(
 
             // --- MAIN APP FLOW ---
             navigation<Route.MainAppGraph>(startDestination = Route.Home) {
+
                 composable<Route.Home> {
-                    MainWrapperScreen(navController)
+                    MainWrapperScreen(
+                        navController,
+                        exercisesViewModel
+                    )
                 }
+
                 composable("exerciseDetail/{routineName}/{exerciseIndex}") { backStackEntry ->
                     val routineName = backStackEntry.arguments?.getString("routineName") ?: ""
                     val index = backStackEntry.arguments?.getString("exerciseIndex")?.toIntOrNull() ?: 0
@@ -128,12 +136,15 @@ fun App(
                         onNextClick = {
                             navController.navigate("exerciseInstructions/$routineName/$index")
                         },
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { navController.popBackStack() },
+                        exercisesViewModel = exercisesViewModel
                     )
                 }
+
                 composable("routineDetail/{routineName}") { backStackEntry ->
                     val routineName = backStackEntry.arguments?.getString("routineName") ?: return@composable
-                    val exercises = RutinasRepository().obtenerEjerciciosPorRutina(routineName)
+                    exercisesViewModel.getRoutineExercises(routineName)
+                    val exercises = stateExercises.ejerciciosRutina
 
                     RoutineDetailScreen(
                         routineName = routineName,

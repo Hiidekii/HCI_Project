@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -27,18 +28,25 @@ fun ExerciseDetailScreen(
     routineName: String,
     exerciseIndex: Int,
     onNextClick: () -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    exercisesViewModel: ExercisesViewModel
 ) {
-    val exercise = RutinasRepository().obtenerEjerciciosPorRutina(routineName).getOrNull(exerciseIndex)
-        ?: return
+    LaunchedEffect(Unit){
+        exercisesViewModel.getExerciseByIndex(exerciseIndex)
+    }
+
+    val stateExercises = exercisesViewModel.state
+    val exercise = stateExercises.selectedExercise
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(exercise.image),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
+        if (exercise != null) {
+            Image(
+                painter = painterResource(exercise.image),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -73,24 +81,28 @@ fun ExerciseDetailScreen(
                     .border(1.dp, Color.White, RoundedCornerShape(10.dp))
                     .padding(horizontal = 22.dp, vertical = 14.dp)
             ) {
-                Text(
-                    text = "${exercise.rewardPoints} Total",
-                    fontSize = 20.sp,
-                    color = Color.White,
-                    fontWeight = FontWeight.Medium
-                )
+                if (exercise != null) {
+                    Text(
+                        text = "${exercise.rewardPoints} Total",
+                        fontSize = 20.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Text(
-                text = exercise.name,
-                color = Color.White,
-                fontSize = 45.sp,
-                fontWeight = FontWeight.ExtraBold,
-                textAlign = TextAlign.Center,
-                lineHeight = 40.sp
-            )
+            if (exercise != null) {
+                Text(
+                    text = exercise.name,
+                    color = Color.White,
+                    fontSize = 45.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    textAlign = TextAlign.Center,
+                    lineHeight = 40.sp
+                )
+            }
 
             Spacer(modifier = Modifier.height(70.dp))
 
@@ -99,17 +111,23 @@ fun ExerciseDetailScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                InfoBlock("${exercise.duration}min", "Tiempo")
+                if (exercise != null) {
+                    InfoBlock("${exercise.duration}min", "Tiempo")
+                }
                 HorizontalDivider(
                     modifier = Modifier.height(40.dp).width(1.dp),
                     color = Color.White
                 )
-                InfoBlock("${exercise.calories}kcal", "Calorías")
+                if (exercise != null) {
+                    InfoBlock("${exercise.calories}kcal", "Calorías")
+                }
                 HorizontalDivider(
                     modifier = Modifier.height(40.dp).width(1.dp),
                     color = Color.White
                 )
-                InfoBlock(exercise.sets, "Sets")
+                if (exercise != null) {
+                    InfoBlock(exercise.sets, "Sets")
+                }
             }
 
             Spacer(modifier = Modifier.height(30.dp))

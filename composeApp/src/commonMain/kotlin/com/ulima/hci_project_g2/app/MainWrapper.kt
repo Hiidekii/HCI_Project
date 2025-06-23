@@ -7,11 +7,15 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.ulima.hci_project_g2.features.mainApp.presentation.components.UlimaFitBottomBar
 import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesScreen
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesViewModel
 import com.ulima.hci_project_g2.features.mainApp.presentation.home.HomeScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.profile.ProfileScreen
 
 @Composable
-fun MainWrapperScreen(navController: NavController) {
+fun MainWrapperScreen(
+    navController: NavController,
+    exercisesViewModel: ExercisesViewModel
+) {
     var selectedIndex by remember { mutableStateOf(0) }
 
     Scaffold(
@@ -29,7 +33,8 @@ fun MainWrapperScreen(navController: NavController) {
                 },
                 onNavigateToRoutineDetail = { routineName ->
                     navController.navigate("routineDetail/$routineName")
-                }
+                },
+                exercisesViewModel = exercisesViewModel
             )
 
             1 -> {
@@ -41,6 +46,12 @@ fun MainWrapperScreen(navController: NavController) {
             }
 
             2 -> ProfileScreen(
+                onLogOutClick = {
+                    navController.navigate(Route.AuthGraph) {
+                        popUpTo(0) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                },
                 modifier = Modifier.padding(paddingValues)
             )
         }

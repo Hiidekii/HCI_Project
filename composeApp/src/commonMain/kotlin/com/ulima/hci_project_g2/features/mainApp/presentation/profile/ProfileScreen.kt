@@ -36,9 +36,17 @@ import hci_project.composeapp.generated.resources.Res
 import hci_project.composeapp.generated.resources.ic_trofeo_v2
 import hci_project.composeapp.generated.resources.img_profile
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier) {
+fun ProfileScreen(
+    modifier: Modifier = Modifier,
+    profileViewModel: ProfileViewModel = koinViewModel(),
+    onLogOutClick: () -> Unit
+) {
+    val state = profileViewModel.state
+    val name = state.name
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -58,7 +66,10 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 contentScale = ContentScale.Crop
             )
             IconButton(
-                onClick = { /* TODO: Acción de logout */ },
+                onClick = {
+                    profileViewModel.clearAllPreferences()
+                    onLogOutClick()
+                },
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(16.dp)
@@ -87,7 +98,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                     tint = Color.DarkGray
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Luis", fontSize = 28.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                Text(name, fontSize = 28.sp, fontWeight = FontWeight.Bold, color = Color.White)
                 Text("Miembro", fontSize = 18.sp, color = Color.White)
             }
         }
@@ -117,9 +128,19 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
                     Row(verticalAlignment = Alignment.Bottom) {
-                        Text("908", fontSize = 36.sp, fontWeight = FontWeight.Bold, color = Color.Black)
+                        Text(
+                            "908",
+                            fontSize = 36.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black
+                        )
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("pts", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color.Gray)
+                        Text(
+                            "pts",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Gray
+                        )
                     }
                     Text("Puntos totales", color = Color.Gray)
                 }
@@ -130,7 +151,9 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
 
         // Botón
         Button(
-            onClick = { /* Acción de canjeo */ },
+            onClick = {
+
+            },
             modifier = Modifier
                 .padding(horizontal = 20.dp)
                 .fillMaxWidth()
