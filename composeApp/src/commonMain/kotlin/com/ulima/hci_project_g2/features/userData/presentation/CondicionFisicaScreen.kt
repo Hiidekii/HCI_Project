@@ -48,7 +48,7 @@ fun CondicionFisicaScreen(
         topBar = {
             UlimaFitTopBar(
                 titulo = "Evaluación",
-                pasoActual = 6,
+                pasoActual = 4,
                 onBackClick = { onReturnClick() }
             )
         },
