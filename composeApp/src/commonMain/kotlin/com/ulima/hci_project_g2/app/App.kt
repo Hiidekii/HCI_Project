@@ -37,7 +37,7 @@ fun App(prefs: DataStore<Preferences>) {
 
         NavHost(
             navController = navController,
-            startDestination = Route.MainAppGraph
+            startDestination = Route.AuthGraph
         ) {
             // --- AUTH FLOW ---
             navigation<Route.AuthGraph>(startDestination = Route.Intro) {
