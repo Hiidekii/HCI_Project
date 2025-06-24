@@ -11,7 +11,6 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ulima.hci_project_g2.features.auth.data.UsuarioRepository
-import com.ulima.hci_project_g2.features.mainApp.data.ExerciseRepository
 import com.ulima.hci_project_g2.features.mainApp.presentation.home.HomeState
 import kotlinx.coroutines.launch
 
