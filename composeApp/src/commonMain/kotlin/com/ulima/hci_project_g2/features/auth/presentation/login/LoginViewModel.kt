@@ -7,6 +7,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -37,14 +38,27 @@ class LoginViewModel(
             )
 
             if (isValid) {
-                val name = usuarioRepository.getName(
-                    usuario = state.code.value,
-                    contrasena = state.password.value
-                )
+                val user = usuarioRepository.login(state.code.value, state.password.value)!!
                 preferences.edit { dataStore ->
                     val nameKey = stringPreferencesKey("nombre")
-                    dataStore[nameKey] = name
+                    dataStore[nameKey] = user.nombre
                 }
+
+                preferences.edit { dataStore ->
+                    val apellidoKey = stringPreferencesKey("apellido")
+                    dataStore[apellidoKey] = user.apellidos
+                }
+
+                preferences.edit { dataStore ->
+                    val carreraKey = stringPreferencesKey("carrera")
+                    dataStore[carreraKey] = user.carrera
+                }
+
+                preferences.edit { dataStore ->
+                    val puntosKey = intPreferencesKey("puntos")
+                    dataStore[puntosKey] = user.puntos
+                }
+
                 preferences.edit { dataStore ->
                     val loggedInKey = booleanPreferencesKey("logged")
                     dataStore[loggedInKey] = true

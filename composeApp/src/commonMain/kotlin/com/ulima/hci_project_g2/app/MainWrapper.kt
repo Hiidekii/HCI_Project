@@ -52,6 +52,7 @@ fun MainWrapperScreen(
                         launchSingleTop = true
                     }
                 },
+                onNextClick = { navController.navigate(Route.Leaderboard) },
                 modifier = Modifier.padding(paddingValues)
             )
         }

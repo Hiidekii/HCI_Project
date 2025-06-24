@@ -29,6 +29,7 @@ import org.koin.compose.viewmodel.koinViewModel
 import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
 import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesViewModel
 import com.ulima.hci_project_g2.features.mainApp.presentation.home.RoutineDetailScreen
+import com.ulima.hci_project_g2.features.mainApp.presentation.profile.LeaderboardScreen
 
 @Composable
 @Preview
@@ -189,7 +190,15 @@ fun App(
                         )
                     }
                 }
+                composable<Route.Leaderboard> {
+                    LeaderboardScreen (
+                        onBackClick = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
             }
+
 
             // --- BOOK FLOW ---
             navigation<Route.BookGraph>(startDestination = Route.BookList) {

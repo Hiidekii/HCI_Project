@@ -71,4 +71,7 @@ sealed interface Route {
 
     @Serializable
     data object Profile : Route
+
+    @Serializable
+    data object Leaderboard : Route
 }

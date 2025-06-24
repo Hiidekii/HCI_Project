@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ulima.hci_project_g2.core.presentation.SecondaryDarkGray
 import hci_project.composeapp.generated.resources.Res
@@ -38,7 +39,8 @@ fun ExerciseTopBar(
             }
         },
         title = {
-            Text(text = title, color = color)
+            Text(text = title, color = color, fontWeight = FontWeight.Bold,)
+
         },
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
     )

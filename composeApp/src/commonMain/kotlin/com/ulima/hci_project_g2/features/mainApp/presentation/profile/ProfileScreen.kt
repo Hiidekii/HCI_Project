@@ -42,7 +42,8 @@ import org.koin.compose.viewmodel.koinViewModel
 fun ProfileScreen(
     modifier: Modifier = Modifier,
     profileViewModel: ProfileViewModel = koinViewModel(),
-    onLogOutClick: () -> Unit
+    onLogOutClick: () -> Unit,
+    onNextClick: () -> Unit
 ) {
     val state = profileViewModel.state
     val name = state.name
@@ -152,7 +153,7 @@ fun ProfileScreen(
         // Botón
         Button(
             onClick = {
-
+                onNextClick()
             },
             modifier = Modifier
                 .padding(horizontal = 20.dp)
