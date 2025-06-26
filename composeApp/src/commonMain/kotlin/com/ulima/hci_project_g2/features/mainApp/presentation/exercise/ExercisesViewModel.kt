@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 class ExercisesViewModel(
     private val exerciseRepository: ExerciseRepository,
     private val rutinasRepository: RutinasRepository
-): ViewModel() {
+) : ViewModel() {
 
     var state by mutableStateOf(ExerciseState())
         private set
@@ -29,7 +29,7 @@ class ExercisesViewModel(
         )
     }
 
-    private fun getRutinas(){
+    private fun getRutinas() {
         viewModelScope.launch {
             val rutinas = rutinasRepository.obtenerRutinas()
             state = state.copy(
@@ -38,7 +38,7 @@ class ExercisesViewModel(
         }
     }
 
-    fun getRoutineExercises(routineName: String){
+    fun getRoutineExercises(routineName: String) {
         viewModelScope.launch {
             val routineExercises = rutinasRepository.obtenerEjerciciosPorRutina(routineName)
             state = state.copy(
@@ -47,11 +47,20 @@ class ExercisesViewModel(
         }
     }
 
-    fun getExerciseByIndex(index: Int){
+    fun getExerciseByIndex(index: Int) {
         viewModelScope.launch {
             val routineExercises = state.ejerciciosRutina
             state = state.copy(
                 selectedExercise = routineExercises[index]
+            )
+        }
+    }
+
+    fun getExerciseByName(name: String) {
+        viewModelScope.launch {
+            val exercise = state.exercises.find { it.name == name }
+            state = state.copy(
+                selectedExercise = exercise
             )
         }
     }

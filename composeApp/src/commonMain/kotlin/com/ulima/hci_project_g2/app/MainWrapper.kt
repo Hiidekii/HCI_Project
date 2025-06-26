@@ -6,7 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.ulima.hci_project_g2.features.mainApp.presentation.components.UlimaFitBottomBar
-import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesScreen
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.allExercise.ExercisesScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesViewModel
 import com.ulima.hci_project_g2.features.mainApp.presentation.home.HomeScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.profile.ProfileScreen
@@ -39,8 +39,9 @@ fun MainWrapperScreen(
 
             1 -> {
                 ExercisesScreen(
-                    onExerciseClick = {
-
+                    paddingValues = paddingValues,
+                    onExerciseClick = { exerciseName ->
+                        navController.navigate("allExerciseDetail/$exerciseName")
                     }
                 )
             }

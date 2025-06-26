@@ -1,12 +1,23 @@
-package com.ulima.hci_project_g2.features.mainApp.presentation.exercise
+package com.ulima.hci_project_g2.features.mainApp.presentation.exercise.allExercise
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -20,20 +31,19 @@ import androidx.compose.ui.unit.sp
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
 import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
 import com.ulima.hci_project_g2.features.mainApp.presentation.components.ExerciseTopBar
-import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesViewModel
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun ExerciseIntructionsScreen(
-    routineName: String,
-    exerciseIndex: Int,
+fun AllExerciseIntructionsScreen(
+    exerciseName: String,
     onNextClick: () -> Unit,
     onBackClick: () -> Unit,
     exercisesViewModel: ExercisesViewModel
 ) {
 
     LaunchedEffect(Unit){
-        exercisesViewModel.getExerciseByIndex(exerciseIndex)
+        exercisesViewModel.getExerciseByName(exerciseName)
     }
 
     val stateExercises = exercisesViewModel.state

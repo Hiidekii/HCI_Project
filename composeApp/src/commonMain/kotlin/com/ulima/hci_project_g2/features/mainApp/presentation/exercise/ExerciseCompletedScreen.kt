@@ -31,6 +31,7 @@ fun ExerciseCompletedScreen(
     duration: Int,
     points: Int,
     image: DrawableResource,
+    dontShowPoints: Boolean,
     onReturnHome: () -> Unit
 ) {
     // Estado para controlar la aparición animada de la notificación
@@ -39,8 +40,14 @@ fun ExerciseCompletedScreen(
     // Se lanza la animación al entrar a la pantalla
     LaunchedEffect(Unit) {
         delay(300) // Un pequeño suspenso para que no aparezca instantáneamente
-        showNotification = true
+        if (dontShowPoints){
+            showNotification = false
+        }else{
+            showNotification = true
+        }
     }
+
+    println(dontShowPoints)
 
     Box(
         modifier = Modifier

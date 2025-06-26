@@ -28,6 +28,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
 import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesViewModel
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.allExercise.AllExerciseDetailScreen
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.allExercise.AllExerciseIntructionsScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.home.RoutineDetailScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.profile.LeaderboardScreen
 
@@ -142,6 +144,18 @@ fun App(
                     )
                 }
 
+                composable("allExerciseDetail/{exerciseName}") { backStackEntry ->
+                    val exerciseName = backStackEntry.arguments?.getString("exerciseName") ?: ""
+                    AllExerciseDetailScreen(
+                        exerciseName = exerciseName,
+                        onNextClick = {
+                            navController.navigate("allExerciseInstructions/$exerciseName")
+                        },
+                        onBackClick = { navController.popBackStack() },
+                        exercisesViewModel = exercisesViewModel
+                    )
+                }
+
                 composable("routineDetail/{routineName}") { backStackEntry ->
                     val routineName = backStackEntry.arguments?.getString("routineName") ?: return@composable
                     exercisesViewModel.getRoutineExercises(routineName)
@@ -166,15 +180,27 @@ fun App(
                         routineName = routineName,
                         exerciseIndex = index,
                         onNextClick = {
-                            navController.navigate("exerciseCompleted/$routineName/$index")
+                            navController.navigate("exerciseCompleted/${false}")
                         },
-                        onBackClick = { navController.popBackStack() }
+                        onBackClick = { navController.popBackStack() },
+                        exercisesViewModel = exercisesViewModel
                     )
                 }
-                composable("exerciseCompleted/{routineName}/{exerciseIndex}") { backStackEntry ->
-                    val routineName = backStackEntry.arguments?.getString("routineName") ?: ""
-                    val index = backStackEntry.arguments?.getString("exerciseIndex")?.toIntOrNull() ?: 0
-                    val exercise = RutinasRepository().obtenerEjerciciosPorRutina(routineName).getOrNull(index)
+                composable("allExerciseInstructions/{exerciseName}") { backStackEntry ->
+                    val exerciseName = backStackEntry.arguments?.getString("exerciseName") ?: ""
+                    AllExerciseIntructionsScreen(
+                        exerciseName = exerciseName,
+                        onNextClick = {
+                            navController.navigate("exerciseCompleted/${true}")
+                        },
+                        onBackClick = { navController.popBackStack() },
+                        exercisesViewModel = exercisesViewModel
+                    )
+                }
+                composable("exerciseCompleted/{dontShowPoints}") { backStackEntry ->
+                    val dontShowPoints = backStackEntry.arguments?.getString("dontShowPoints")?.toBoolean() ?: false
+                    val state = exercisesViewModel.state
+                    val exercise = state.selectedExercise
 
                     if (exercise != null) {
                         ExerciseCompletedScreen(
@@ -186,7 +212,8 @@ fun App(
                                 navController.navigate(Route.Home) {
                                     popUpTo(Route.MainAppGraph) { inclusive = false }
                                 }
-                            }
+                            },
+                            dontShowPoints = dontShowPoints
                         )
                     }
                 }

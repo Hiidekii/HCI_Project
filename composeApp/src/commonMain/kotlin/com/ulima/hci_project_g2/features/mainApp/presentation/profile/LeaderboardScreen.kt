@@ -91,13 +91,13 @@ fun LeaderboardScreen (
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = "Luis Martinez Rueda",
+                            text = state.name + " " + state.apellido,
                             color = Color.White,
                             fontWeight = FontWeight.Bold,
                             fontSize = 20.sp
                         )
                         Text(
-                            text = "Ingeniería de Sistemas",
+                            text = state.carrera,
                             color = SecondaryLightOrange,
                             fontWeight = FontWeight.Bold,
                             fontSize = 17.sp
@@ -168,7 +168,7 @@ fun LeaderboardScreen (
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                itemsIndexed(ranking.sortedBy { it.puntos }) { index, ranking ->
+                itemsIndexed(ranking.sortedByDescending { it.puntos }) { index, ranking ->
                     LeaderboardCard(
                         puesto= (index+1).toString(),
                         name= ranking.nombre,

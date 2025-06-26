@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.features.mainApp.presentation.exercise
+package com.ulima.hci_project_g2.features.mainApp.presentation.exercise.allExercise
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,18 +33,19 @@ import androidx.compose.ui.unit.sp
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
 import com.ulima.hci_project_g2.core.presentation.PrimaryWhite
 import com.ulima.hci_project_g2.features.mainApp.presentation.components.ExerciseTopBar
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesViewModel
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.InfoBlock
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun ExerciseDetailScreen(
-    routineName: String,
-    exerciseIndex: Int,
+fun AllExerciseDetailScreen(
+    exerciseName: String,
     onNextClick: () -> Unit,
     onBackClick: () -> Unit,
     exercisesViewModel: ExercisesViewModel
 ) {
     LaunchedEffect(Unit){
-        exercisesViewModel.getExerciseByIndex(exerciseIndex)
+        exercisesViewModel.getExerciseByName(exerciseName)
     }
 
     val stateExercises = exercisesViewModel.state
@@ -160,14 +161,5 @@ fun ExerciseDetailScreen(
 
             Spacer(modifier = Modifier.height(50.dp))
         }
-    }
-}
-
-@Composable
-fun InfoBlock(value: String, label: String) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(value, color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(9.dp))
-        Text(label, color = Color.LightGray, fontSize = 20.sp, fontWeight = FontWeight.Bold)
     }
 }

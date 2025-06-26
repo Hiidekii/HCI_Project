@@ -1,4 +1,4 @@
-package com.ulima.hci_project_g2.features.mainApp.presentation.exercise
+package com.ulima.hci_project_g2.features.mainApp.presentation.exercise.allExercise
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,13 +40,15 @@ import androidx.compose.ui.unit.sp
 import com.ulima.hci_project_g2.core.presentation.PrimaryGray
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
 import com.ulima.hci_project_g2.features.mainApp.domain.MuscleGroup
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesViewModel
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun ExercisesScreen(
-    onExerciseClick: () -> Unit,
+    paddingValues: PaddingValues,
+    onExerciseClick: (String) -> Unit,
     exercisesViewModel: ExercisesViewModel = koinViewModel()
 ) {
     val state = exercisesViewModel.state
@@ -60,6 +63,7 @@ fun ExercisesScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(paddingValues)
             .padding(horizontal = 16.dp)
     ) {
         Spacer(modifier = Modifier.height(50.dp))
@@ -111,7 +115,8 @@ fun ExercisesScreen(
                 ExerciseCard(
                     name = exercise.name,
                     muscles = exercise.muscleGroups,
-                    image = exercise.image
+                    image = exercise.image,
+                    onExerciseClick = onExerciseClick
                 )
             }
         }
@@ -122,7 +127,8 @@ fun ExercisesScreen(
 fun ExerciseCard(
     name: String,
     muscles: List<MuscleGroup>,
-    image: DrawableResource
+    image: DrawableResource,
+    onExerciseClick: (String) -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -131,7 +137,7 @@ fun ExerciseCard(
             .clip(RoundedCornerShape(36.dp))
             .background(PrimaryGray)
             .clickable {
-
+                onExerciseClick(name)
             },
         contentAlignment = Alignment.CenterStart
     ) {
