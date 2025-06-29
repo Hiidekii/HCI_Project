@@ -18,12 +18,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.ulima.hci_project_g2.book.presentation.SelectedBookViewModel
-import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailAction
-import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailScreenRoot
-import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailViewModel
-import com.ulima.hci_project_g2.book.presentation.book_list.BookListScreenRoot
-import com.ulima.hci_project_g2.book.presentation.book_list.BookListViewModel
 import com.ulima.hci_project_g2.features.auth.presentation.intro.IntroScreen
 import com.ulima.hci_project_g2.features.auth.presentation.login.LoginScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExerciseCompletedScreen
@@ -253,47 +247,6 @@ fun App(
                         onBackClick = {
                             navController.popBackStack()
                         }
-                    )
-                }
-            }
-
-
-            // --- BOOK FLOW ---
-            navigation<Route.BookGraph>(startDestination = Route.BookList) {
-                composable<Route.BookList>(
-                    exitTransition = { slideOutHorizontally() },
-                    popEnterTransition = { slideInHorizontally() }
-                ) {
-                    val viewModel = koinViewModel<BookListViewModel>()
-                    val selectedBookViewModel = it.sharedKoinViewModel<SelectedBookViewModel>(navController)
-
-                    LaunchedEffect(true) {
-                        selectedBookViewModel.onSelectBook(null)
-                    }
-
-                    BookListScreenRoot(
-                        viewModel = viewModel,
-                        onBookClick = { book ->
-                            selectedBookViewModel.onSelectBook(book)
-                            navController.navigate(Route.BookDetail(book.id))
-                        }
-                    )
-                }
-                composable<Route.BookDetail>(
-                    enterTransition = { slideInHorizontally { it } },
-                    exitTransition = { slideOutHorizontally { it } }
-                ) {
-                    val selectedBookViewModel = it.sharedKoinViewModel<SelectedBookViewModel>(navController)
-                    val viewModel = koinViewModel<BookDetailViewModel>()
-                    val selectedBook by selectedBookViewModel.selectedBook.collectAsStateWithLifecycle()
-
-                    LaunchedEffect(selectedBook) {
-                        selectedBook?.let { viewModel.onAction(BookDetailAction.OnSelectedBookChange(it)) }
-                    }
-
-                    BookDetailScreenRoot(
-                        viewModel = viewModel,
-                        onBackClick = { navController.navigateUp() }
                     )
                 }
             }
