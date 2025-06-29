@@ -32,7 +32,7 @@ fun ExerciseCompletedScreen(
     points: Int,
     image: DrawableResource,
     dontShowPoints: Boolean,
-    onReturnHome: () -> Unit
+    onReturn: () -> Unit,
 ) {
     // Estado para controlar la aparición animada de la notificación
     var showNotification by remember { mutableStateOf(false) }
@@ -113,7 +113,9 @@ fun ExerciseCompletedScreen(
                 Spacer(modifier = Modifier.height(40.dp))
 
                 Button(
-                    onClick = onReturnHome,
+                    onClick = {
+                        onReturn()
+                     },
                     shape = RoundedCornerShape(20.dp),
                     modifier = Modifier
                         .fillMaxWidth()

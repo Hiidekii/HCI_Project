@@ -180,7 +180,7 @@ fun App(
                         routineName = routineName,
                         exerciseIndex = index,
                         onNextClick = {
-                            navController.navigate("exerciseCompleted/${false}")
+                            navController.navigate("exerciseCompleted/${false}/$routineName")
                         },
                         onBackClick = { navController.popBackStack() },
                         exercisesViewModel = exercisesViewModel
@@ -208,12 +208,32 @@ fun App(
                             duration = exercise.duration,
                             points = exercise.rewardPoints,
                             image = exercise.image,
-                            onReturnHome = {
-                                navController.navigate(Route.Home) {
-                                    popUpTo(Route.MainAppGraph) { inclusive = false }
-                                }
+                            onReturn       = {
+                                navController.popBackStack(Route.Home, inclusive = false)
                             },
                             dontShowPoints = dontShowPoints
+                        )
+                    }
+                }
+                
+                composable("exerciseCompleted/{dontShowPoints}/{routineName}") { backStackEntry ->
+                    val dontShowPoints = backStackEntry.arguments?.getString("dontShowPoints")?.toBoolean() ?: false
+                    val routineName = backStackEntry.arguments?.getString("routineName") ?: return@composable
+                    val state = exercisesViewModel.state
+                    val exercise = state.selectedExercise
+
+                    if (exercise != null) {
+                        ExerciseCompletedScreen(
+                            calories = exercise.calories,
+                            duration = exercise.duration,
+                            points = exercise.rewardPoints,
+                            image = exercise.image,
+                            dontShowPoints = dontShowPoints,
+                            onReturn = {
+                                navController.navigate("routineDetail/$routineName") {
+                                    popUpTo("routineDetail/routineName") { inclusive = true }
+                                }
+                            },
                         )
                     }
                 }

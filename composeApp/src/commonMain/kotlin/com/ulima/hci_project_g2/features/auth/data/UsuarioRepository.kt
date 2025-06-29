@@ -35,6 +35,14 @@ class UsuarioRepository {
             apellidos  = "Mendoza Ríos",
             carrera    = "Ingeniería Industrial",
             puntos     = 964
+        ),
+        Usuario(
+            usuario    = "a",
+            contrasena = "a",
+            nombre     = "Anita",
+            apellidos  = "Rios Rueda",
+            carrera    = "Ingeniería Civil",
+            puntos     = 964
         )
     )
 
