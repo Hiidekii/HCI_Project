@@ -4,14 +4,20 @@ import CondicionFisicaScreen
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
-import androidx.navigation.compose.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
+import androidx.navigation.compose.rememberNavController
 import com.ulima.hci_project_g2.book.presentation.SelectedBookViewModel
 import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailAction
 import com.ulima.hci_project_g2.book.presentation.book_detail.BookDetailScreenRoot
@@ -20,18 +26,23 @@ import com.ulima.hci_project_g2.book.presentation.book_list.BookListScreenRoot
 import com.ulima.hci_project_g2.book.presentation.book_list.BookListViewModel
 import com.ulima.hci_project_g2.features.auth.presentation.intro.IntroScreen
 import com.ulima.hci_project_g2.features.auth.presentation.login.LoginScreen
+import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExerciseCompletedScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExerciseDetailScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExerciseIntructionsScreen
-import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExerciseCompletedScreen
-import com.ulima.hci_project_g2.features.userData.presentation.*
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.viewmodel.koinViewModel
-import com.ulima.hci_project_g2.features.mainApp.data.RutinasRepository
 import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.ExercisesViewModel
 import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.allExercise.AllExerciseDetailScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.exercise.allExercise.AllExerciseIntructionsScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.home.RoutineDetailScreen
 import com.ulima.hci_project_g2.features.mainApp.presentation.profile.LeaderboardScreen
+import com.ulima.hci_project_g2.features.userData.presentation.AlturaScreen
+import com.ulima.hci_project_g2.features.userData.presentation.EdadScreen
+import com.ulima.hci_project_g2.features.userData.presentation.GeneroScreen
+import com.ulima.hci_project_g2.features.userData.presentation.IntroduccionScreen
+import com.ulima.hci_project_g2.features.userData.presentation.ObjetivoFitnessScreen
+import com.ulima.hci_project_g2.features.userData.presentation.PesoScreen
+import com.ulima.hci_project_g2.features.userData.presentation.UserDataStartScreen
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 @Preview

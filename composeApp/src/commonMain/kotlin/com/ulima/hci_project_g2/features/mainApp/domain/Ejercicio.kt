@@ -20,7 +20,6 @@ enum class MuscleGroup(val displayName: String) {
     BACK("Espalda"),
     LEGS("Piernas"),
     GLUTES("Glúteos"),
-    SHOULDERS("Hombros"),
     ARMS("Brazos"),
     CORE("Core"),
     FULL_BODY("Cuerpo completo")
