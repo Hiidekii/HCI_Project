@@ -47,6 +47,8 @@ fun LeaderboardScreen (
 ){
     val state = profileViewModel.state
     val ranking = state.leaderboard
+    val puesto = state.puesto
+    val puntos = state.puntos
     Scaffold(
         topBar = {
             ExerciseTopBar(onBackClick = onBackClick, title = "Leaderboard", color = Color.Black)
@@ -124,7 +126,7 @@ fun LeaderboardScreen (
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = "4",
+                            puesto.toString(),
                             fontSize = 26.sp,
                             fontWeight = FontWeight.Bold
                         )
@@ -150,7 +152,7 @@ fun LeaderboardScreen (
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = "987",
+                            puntos.toString(),
                             fontSize = 26.sp,
                             fontWeight = FontWeight.Bold
                         )

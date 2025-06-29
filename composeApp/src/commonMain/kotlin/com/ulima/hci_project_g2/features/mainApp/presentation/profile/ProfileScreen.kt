@@ -47,6 +47,7 @@ fun ProfileScreen(
 ) {
     val state = profileViewModel.state
     val name = state.name
+    val puntos = state.puntos
 
     Column(
         modifier = modifier
@@ -130,7 +131,7 @@ fun ProfileScreen(
                 Column {
                     Row(verticalAlignment = Alignment.Bottom) {
                         Text(
-                            "908",
+                            puntos.toString(),
                             fontSize = 36.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.Black

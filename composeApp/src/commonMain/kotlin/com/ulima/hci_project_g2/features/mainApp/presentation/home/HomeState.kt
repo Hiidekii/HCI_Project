@@ -7,5 +7,6 @@ data class HomeState(
     val apellido : String = "",
     val carrera : String = "",
     val puntos : Int = 0,
+    val puesto : Int = 0,
     val leaderboard: List<Usuario> = emptyList()
 )

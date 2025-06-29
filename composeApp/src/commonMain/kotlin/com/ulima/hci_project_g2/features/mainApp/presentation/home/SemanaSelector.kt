@@ -29,12 +29,19 @@ import com.ulima.hci_project_g2.core.presentation.PrimaryBlack
 import com.ulima.hci_project_g2.core.presentation.PrimaryOrange
 
 @Composable
-fun SemanaSelector() {
-    val semanas = listOf("SEMANA 1", "SEMANA 2", "SEMANA 3", "SEMANA 4")
-    var selected by remember { mutableStateOf(1) }
-
+fun SemanaSelector(
+    semanas: List<String>,
+    selected: Int,
+    onWeekSelected: (Int) -> Unit
+) {
     Column {
-        Text("Mi Rutina", modifier = Modifier.padding(start = 16.dp), fontWeight = FontWeight.Bold, fontSize = 24.sp, color = PrimaryBlack)
+        Text(
+            "Mi Rutina",
+            modifier = Modifier.padding(start = 16.dp),
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            color = PrimaryBlack
+        )
         Spacer(modifier = Modifier.height(10.dp))
         LazyRow(contentPadding = PaddingValues(horizontal = 16.dp)) {
             itemsIndexed(semanas) { index, semana ->
@@ -42,7 +49,7 @@ fun SemanaSelector() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .padding(end = 24.dp)
-                        .clickable { selected = index }
+                        .clickable { onWeekSelected(index) }
                 ) {
                     Text(
                         text = semana,

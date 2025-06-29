@@ -40,7 +40,7 @@ fun RutinaLista(
             start = 16.dp,
             end = 16.dp,
             top = 8.dp,
-            bottom = 100.dp // espacio para el BottomBar
+            bottom = 100.dp
         )
     ) {
         itemsIndexed(rutinas) { index, rutina ->
@@ -64,7 +64,12 @@ fun RutinaLista(
                         contentAlignment = Alignment.Center
                     ) {
                         if (index == 0) {
-                            Icon(Icons.Default.PlayArrow, contentDescription = "Play", tint = Color.White, modifier = Modifier.size(16.dp))
+                            Icon(
+                                imageVector = Icons.Default.PlayArrow,
+                                contentDescription = "Inicio",
+                                tint = Color.White,
+                                modifier = Modifier.size(16.dp)
+                            )
                         }
                     }
                     Spacer(modifier = Modifier.height(4.dp))
