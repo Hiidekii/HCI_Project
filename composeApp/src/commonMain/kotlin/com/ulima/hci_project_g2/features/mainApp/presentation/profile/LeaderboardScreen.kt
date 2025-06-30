@@ -126,7 +126,7 @@ fun LeaderboardScreen (
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            puesto.toString(),
+                            profileViewModel.getPuesto(),
                             fontSize = 26.sp,
                             fontWeight = FontWeight.Bold
                         )

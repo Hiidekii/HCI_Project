@@ -50,6 +50,11 @@ class LoginViewModel(
                 }
 
                 preferences.edit { dataStore ->
+                    val codigoKey = stringPreferencesKey("codigo")
+                    dataStore[codigoKey] = user.usuario
+                }
+
+                preferences.edit { dataStore ->
                     val carreraKey = stringPreferencesKey("carrera")
                     dataStore[carreraKey] = user.carrera
                 }

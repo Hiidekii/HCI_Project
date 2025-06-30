@@ -5,6 +5,7 @@ import com.ulima.hci_project_g2.features.auth.domain.Usuario
 data class HomeState(
     val name : String = "",
     val apellido : String = "",
+    val codigo: String = "",
     val carrera : String = "",
     val puntos : Int = 0,
     val puesto : Int = 0,

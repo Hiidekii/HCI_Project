@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 class ProfileViewModel(
     private val preferences: DataStore<Preferences>,
     private val usuarioRepository: UsuarioRepository
-): ViewModel() {
+) : ViewModel() {
 
     var state by mutableStateOf(HomeState())
         private set
@@ -25,10 +25,10 @@ class ProfileViewModel(
     init {
         getName()
         getApellido()
+        getCodigo()
         getCarrera()
         getPuntos()
         getRanking()
-        getPuesto()
     }
 
     fun clearAllPreferences() {
@@ -37,47 +37,61 @@ class ProfileViewModel(
         }
     }
 
-    private fun getName(){
+    private fun getName() {
         viewModelScope.launch {
-            preferences.data.collect{ dataStore ->
+            preferences.data.collect { dataStore ->
                 val nameKey = stringPreferencesKey("nombre")
                 val name = dataStore[nameKey]
-                if (name != null){
+                if (name != null) {
                     state = state.copy(name = name)
                 }
             }
         }
     }
-    private fun getApellido(){
+
+    private fun getApellido() {
         viewModelScope.launch {
-            preferences.data.collect{ dataStore ->
+            preferences.data.collect { dataStore ->
                 val apellidoKey = stringPreferencesKey("apellido")
                 val apellido = dataStore[apellidoKey]
-                if (apellido != null){
+                if (apellido != null) {
                     state = state.copy(apellido = apellido)
                 }
             }
         }
     }
 
-    private fun getCarrera(){
+    private fun getCodigo() {
         viewModelScope.launch {
-            preferences.data.collect{ dataStore ->
+            preferences.data.collect { dataStore ->
+                val codigoKey = stringPreferencesKey("codigo")
+                val codigo = dataStore[codigoKey]
+                println("codigo get codigo: $codigo")
+                if (codigo != null) {
+                    state = state.copy(codigo = codigo)
+                }
+            }
+        }
+    }
+
+    private fun getCarrera() {
+        viewModelScope.launch {
+            preferences.data.collect { dataStore ->
                 val carreraKey = stringPreferencesKey("carrera")
                 val carrera = dataStore[carreraKey]
-                if (carrera != null){
+                if (carrera != null) {
                     state = state.copy(carrera = carrera)
                 }
             }
         }
     }
 
-    private fun getPuntos(){
+    private fun getPuntos() {
         viewModelScope.launch {
-            preferences.data.collect{ dataStore ->
+            preferences.data.collect { dataStore ->
                 val puntosKey = intPreferencesKey("puntos")
                 val puntos = dataStore[puntosKey]
-                if (puntos != null){
+                if (puntos != null) {
                     state = state.copy(puntos = puntos)
                 }
             }
@@ -86,16 +100,21 @@ class ProfileViewModel(
 
 
     private fun getRanking() {
-        val leaderboard = usuarioRepository.obtenerRanking()
-        state = state.copy(
-            leaderboard = leaderboard
-        )
+        viewModelScope.launch {
+            val leaderboard = usuarioRepository.obtenerRanking()
+            state = state.copy(
+                leaderboard = leaderboard.sortedByDescending { it.puntos }
+            )
+        }
     }
 
-    private fun getPuesto() {
-
+    fun getPuesto(): String {
+        val lista = state.leaderboard
+        val codigo = state.codigo
+        println("codigo get puesto: $codigo")
+        val puesto = lista.indexOfFirst {
+            it.usuario.trim().lowercase() == codigo.trim().lowercase()
+        }
+        return (puesto+1).toString()
     }
-
-
-
 }
